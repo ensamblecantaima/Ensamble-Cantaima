@@ -20,8 +20,7 @@
 
     /* ── NAV ── */
     nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:64px;background:rgba(8,8,7,0.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(200,168,75,0.08)}
-    .nav-logo{display:flex;align-items:center;text-decoration:none}
-    .nav-logo img{height:48px;display:block}
+    .nav-brand{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--wht);cursor:pointer;text-decoration:none}
     .nav-links{display:flex;gap:2.5rem;align-items:center}
     .nav-links a{font-size:11px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;color:rgba(244,240,232,0.5);text-decoration:none;transition:color .25s}
     .nav-links a:hover{color:var(--wht)}
@@ -138,6 +137,77 @@
 
     hr.hr{border:none;border-top:1px solid rgba(200,168,75,.07);margin:0}
 
+    /* ── GALLERY ── */
+    .gallery-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:3px;
+      margin-top:2.5rem;
+    }
+    .gallery-item{
+      position:relative;
+      overflow:hidden;
+      aspect-ratio:1;
+      cursor:pointer;
+      background:#111;
+    }
+    .gallery-item img{
+      width:100%;height:100%;
+      object-fit:cover;
+      display:block;
+      transition:transform .5s ease, filter .4s ease;
+      filter:grayscale(20%) brightness(.85);
+    }
+    .gallery-item:hover img{
+      transform:scale(1.06);
+      filter:grayscale(0%) brightness(1);
+    }
+    .gallery-item.wide{grid-column:span 2;}
+    .gallery-item.tall{grid-row:span 2;}
+
+    /* LIGHTBOX */
+    #lightbox{
+      display:none;position:fixed;inset:0;z-index:9999;
+      background:rgba(0,0,0,.94);
+      align-items:center;justify-content:center;
+      cursor:zoom-out;
+    }
+    #lightbox.open{display:flex;}
+    #lightbox img{
+      max-width:92vw;max-height:92vh;
+      object-fit:contain;
+      border:1px solid rgba(200,168,75,.15);
+    }
+    #lightbox-close{
+      position:absolute;top:1.5rem;right:2rem;
+      font-size:28px;color:rgba(244,240,232,.5);
+      cursor:pointer;background:none;border:none;
+      font-family:'Inter',sans-serif;line-height:1;
+      transition:color .2s;
+    }
+    #lightbox-close:hover{color:var(--gold);}
+    #lightbox-prev,#lightbox-next{
+      position:absolute;top:50%;transform:translateY(-50%);
+      background:none;border:1px solid rgba(200,168,75,.3);
+      color:var(--gold);font-size:18px;width:44px;height:44px;
+      display:flex;align-items:center;justify-content:center;
+      cursor:pointer;transition:all .2s;
+    }
+    #lightbox-prev{left:1.5rem;}
+    #lightbox-next{right:1.5rem;}
+    #lightbox-prev:hover,#lightbox-next:hover{background:rgba(200,168,75,.12);border-color:var(--gold);}
+    #lightbox-caption{
+      position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);
+      font-size:10px;letter-spacing:2px;text-transform:uppercase;
+      color:rgba(200,168,75,.6);font-family:'Inter',sans-serif;
+      white-space:nowrap;
+    }
+
+    @media(max-width:640px){
+      .gallery-grid{grid-template-columns:repeat(2,1fr);}
+      .gallery-item.wide{grid-column:span 1;}
+    }
+
     /* ── MOBILE ── */
     @media(max-width:768px){
       nav{padding:0 1.2rem}
@@ -160,14 +230,13 @@
 
 <!-- NAV -->
 <nav id="navbar">
-  <a class="nav-logo" href="#hero">
-    <img src="https://ensamblecantaima.github.io/Ensamble-Cantaima/Logo_cantaima_png.png" alt="Ensamble Cantaima">
-  </a>
+  <a class="nav-brand" href="#hero">Cantaima</a>
   <div class="nav-links" id="nav-links">
     <a href="#nosotros" onclick="closeMenu()">Nosotros</a>
     <a href="#espectaculo" onclick="closeMenu()">Espectáculo</a>
     <a href="#videos" onclick="closeMenu()">Videos</a>
     <a href="#trayectoria" onclick="closeMenu()">Trayectoria</a>
+    <a href="#galeria" onclick="closeMenu()">Galería</a>
     <a href="#contacto" onclick="closeMenu()">Contacto</a>
     <button class="lang-btn" id="lb" onclick="toggleLang()">EN</button>
   </div>
@@ -409,6 +478,59 @@
   </div>
 </section>
 
+<!-- LEAF 4 -->
+<div class="leaf-sep" aria-hidden="true">
+  <svg viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="20" x2="42" y2="20" stroke="#c8a84b" stroke-width="0.6" opacity=".35"/>
+    <path d="M42 20 Q60 6 78 20 Q60 34 42 20Z" fill="#c8a84b" opacity=".18"/>
+    <line x1="78" y1="20" x2="120" y2="20" stroke="#c8a84b" stroke-width="0.6" opacity=".35"/>
+    <circle cx="60" cy="20" r="1.8" fill="#c8a84b" opacity=".6"/>
+  </svg>
+</div>
+
+<!-- GALERÍA -->
+<section id="galeria">
+  <div class="sec-label" id="l-gal">Registro visual</div>
+  <h2 class="sec-title"><em>Galería</em></h2>
+  <div class="gallery-grid">
+    <div class="gallery-item wide" onclick="openLightbox(0)">
+      <img src="DDP06546.jpg" alt="Ensamble Cantaima con instrumentos" loading="lazy"/>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(1)">
+      <img src="DDP06567.jpg" alt="Ensamble Cantaima — retrato grupal" loading="lazy"/>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(2)">
+      <img src="DDP06601.jpg" alt="Ensamble Cantaima — formación" loading="lazy"/>
+    </div>
+    <div class="gallery-item wide" onclick="openLightbox(3)">
+      <img src="DDP06558.jpg" alt="Ensamble Cantaima sentados" loading="lazy"/>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(4)">
+      <img src="DDP06682.jpg" alt="Ensamble Cantaima — estudio de grabación" loading="lazy"/>
+    </div>
+    <div class="gallery-item" onclick="openLightbox(5)">
+      <img src="IMG-20251120-WA0000.jpg" alt="Ensamble Cantaima en concierto" loading="lazy"/>
+    </div>
+    <div class="gallery-item wide" onclick="openLightbox(6)">
+      <img src="Cantaima_2025_-70.jpg" alt="Ensamble Cantaima — sesión 2025" loading="lazy"/>
+    </div>
+    <div class="gallery-item wide" onclick="openLightbox(7)">
+      <img src="IMG_0204__1_.JPG" alt="Ensamble Cantaima — Festival Turpial Cafetero" loading="lazy"/>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox(event)">
+  <button id="lightbox-close" onclick="closeLightbox()" aria-label="Cerrar">✕</button>
+  <button id="lightbox-prev" onclick="prevPhoto(event)" aria-label="Anterior">&#8592;</button>
+  <img id="lightbox-img" src="" alt=""/>
+  <button id="lightbox-next" onclick="nextPhoto(event)" aria-label="Siguiente">&#8594;</button>
+  <div id="lightbox-caption"></div>
+</div>
+
+<hr class="hr"/>
+
 <!-- FOOTER -->
 <footer class="site-footer">
   <svg class="footer-leaf" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -424,9 +546,10 @@
 </footer>
 
 <script>
+  /* ── LANG ── */
   const T={
-    es:{'h-ey':'El latido del territorio pijao','h-sub':'Música andina colombiana','h-tag':'Desde Natagaima, Tolima, llevamos el alma del folclor a escenarios de todo el mundo desde 2013.','h-b1':'El espectáculo','h-b2':'Contáctanos','l-who':'Perfil artístico','a1':'Ensamble Cantaima es una agrupación de música andina colombiana fundada el 18 de marzo de 2013 en Natagaima, Tolima — territorio reconocido como cuna de grandes referentes del folclor colombiano.','a2':'Nacimos como Ensamble Cantalicio Rojas y en 2021 consolidamos nuestra identidad actual, fortaleciendo nuestra propuesta escénica y proyección internacional. Nuestros 8 músicos representan la diversidad del Tolima: Ortega, Natagaima, Carmen de Apicalá, Cajamarca e Ibagué.','a3':'En 2023 creamos Avíspese a Tocar, una serie educativa en YouTube para que niños y jóvenes aprendan los ritmos tradicionales del Tolima.','s1':'Fundación','s2':'Músicos','s3':'Países','s4':'Premios','l-show':'En vivo','show-p':'Un viaje escénico desde el Tolima a través del pasillo, bambuco, caña, rajaleña, sanjuanero y carranga. Con recursos visuales en pantalla y un personaje conductor que interactúa con el público.','p1t':'La raíz','p1d':'Conexión con el origen y la identidad del territorio pijao.','p2t':'La resistencia','p2d':'La tradición viva que se reinventa en cada escenario.','p3t':'La fiesta','p3d':'La música como expresión colectiva que celebra la vida.','l-vid':'Audiovisual','v1':'San Juan y San Pedro (Cover)','v2':'Cantaima en Vivo','ytbtn':'Ver canal en YouTube','l-tray':'Historia','intl':'Internacional','nac':'Nacional','l-rec':'Palmarés','l-disc':'Música','alb':'10 composiciones de maestros del folclor colombiano: Cantalicio Rojas, Leonardo Laverde, Jorge Velosa y Carlos Alberto Rodríguez Molina. Una declaración de amor a la tradición andina del Tolima Grande.','l-team':'El ensamble','l-cnt':'Bookings y prensa','c1':'Correo','c2':'WhatsApp','fol':'Síguenos','ft':'Natagaima, Tolima, Colombia · El latido del territorio pijao · © 2026'},
-    en:{'h-ey':'The heartbeat of Pijao territory','h-sub':'Colombian Andean music','h-tag':'From Natagaima, Tolima, we carry the soul of folklore to stages around the world since 2013.','h-b1':'The show','h-b2':'Contact us','l-who':'Artistic profile','a1':'Ensamble Cantaima is a Colombian Andean music ensemble founded on March 18, 2013 in Natagaima, Tolima — a territory recognized as the cradle of great Colombian folklore.','a2':'We were born as Ensamble Cantalicio Rojas and in 2021 consolidated our current identity, strengthening our stage proposal and international reach. Our 8 musicians represent the diversity of Tolima.','a3':'In 2023 we created Avíspese a Tocar, an educational YouTube series for children and young people to learn traditional Tolima rhythms.','s1':'Founded','s2':'Musicians','s3':'Countries','s4':'Awards','l-show':'Live','show-p':'A scenic journey from Tolima through pasillo, bambuco, caña, rajaleña, sanjuanero and carranga. With visual resources on screen and a host character who interacts with the audience.','p1t':'The root','p1d':'Connection with the origin and identity of the Pijao territory.','p2t':'The resistance','p2d':'A living tradition that reinvents itself on every stage.','p3t':'The fiesta','p3d':'Music as a collective expression that celebrates life.','l-vid':'Audiovisual','v1':'San Juan y San Pedro (Cover)','v2':'Cantaima Live','ytbtn':'Watch YouTube channel','l-tray':'History','intl':'International','nac':'National','l-rec':'Awards','l-disc':'Music','alb':'10 compositions by Colombian folklore masters: Cantalicio Rojas, Leonardo Laverde, Jorge Velosa and Carlos Alberto Rodríguez Molina. A declaration of love for the Andean tradition of Tolima Grande.','l-team':'The ensemble','l-cnt':'Bookings & press','c1':'Email','c2':'WhatsApp','fol':'Follow us','ft':'Natagaima, Tolima, Colombia · The heartbeat of Pijao territory · © 2026'}
+    es:{'h-ey':'El latido del territorio pijao','h-sub':'Música andina colombiana','h-tag':'Desde Natagaima, Tolima, llevamos el alma del folclor a escenarios de todo el mundo desde 2013.','h-b1':'El espectáculo','h-b2':'Contáctanos','l-who':'Perfil artístico','a1':'Ensamble Cantaima es una agrupación de música andina colombiana fundada el 18 de marzo de 2013 en Natagaima, Tolima — territorio reconocido como cuna de grandes referentes del folclor colombiano.','a2':'Nacimos como Ensamble Cantalicio Rojas y en 2021 consolidamos nuestra identidad actual, fortaleciendo nuestra propuesta escénica y proyección internacional. Nuestros 8 músicos representan la diversidad del Tolima: Ortega, Natagaima, Carmen de Apicalá, Cajamarca e Ibagué.','a3':'En 2023 creamos Avíspese a Tocar, una serie educativa en YouTube para que niños y jóvenes aprendan los ritmos tradicionales del Tolima.','s1':'Fundación','s2':'Músicos','s3':'Países','s4':'Premios','l-show':'En vivo','show-p':'Un viaje escénico desde el Tolima a través del pasillo, bambuco, caña, rajaleña, sanjuanero y carranga. Con recursos visuales en pantalla y un personaje conductor que interactúa con el público.','p1t':'La raíz','p1d':'Conexión con el origen y la identidad del territorio pijao.','p2t':'La resistencia','p2d':'La tradición viva que se reinventa en cada escenario.','p3t':'La fiesta','p3d':'La música como expresión colectiva que celebra la vida.','l-vid':'Audiovisual','v1':'San Juan y San Pedro (Cover)','v2':'Cantaima en Vivo','ytbtn':'Ver canal en YouTube','l-tray':'Historia','intl':'Internacional','nac':'Nacional','l-rec':'Palmarés','l-disc':'Música','alb':'10 composiciones de maestros del folclor colombiano: Cantalicio Rojas, Leonardo Laverde, Jorge Velosa y Carlos Alberto Rodríguez Molina. Una declaración de amor a la tradición andina del Tolima Grande.','l-team':'El ensamble','l-gal':'Registro visual','c1':'Correo','c2':'WhatsApp','fol':'Síguenos','ft':'Natagaima, Tolima, Colombia · El latido del territorio pijao · © 2026'},
+    en:{'h-ey':'The heartbeat of Pijao territory','h-sub':'Colombian Andean music','h-tag':'From Natagaima, Tolima, we carry the soul of folklore to stages around the world since 2013.','h-b1':'The show','h-b2':'Contact us','l-who':'Artistic profile','a1':'Ensamble Cantaima is a Colombian Andean music ensemble founded on March 18, 2013 in Natagaima, Tolima — a territory recognized as the cradle of great Colombian folklore.','a2':'We were born as Ensamble Cantalicio Rojas and in 2021 consolidated our current identity, strengthening our stage proposal and international reach. Our 8 musicians represent the diversity of Tolima.','a3':'In 2023 we created Avíspese a Tocar, an educational YouTube series for children and young people to learn traditional Tolima rhythms.','s1':'Founded','s2':'Musicians','s3':'Countries','s4':'Awards','l-show':'Live','show-p':'A scenic journey from Tolima through pasillo, bambuco, caña, rajaleña, sanjuanero and carranga. With visual resources on screen and a host character who interacts with the audience.','p1t':'The root','p1d':'Connection with the origin and identity of the Pijao territory.','p2t':'The resistance','p2d':'A living tradition that reinvents itself on every stage.','p3t':'The fiesta','p3d':'Music as a collective expression that celebrates life.','l-vid':'Audiovisual','v1':'San Juan y San Pedro (Cover)','v2':'Cantaima Live','ytbtn':'Watch YouTube channel','l-tray':'History','intl':'International','nac':'National','l-rec':'Awards','l-disc':'Music','alb':'10 compositions by Colombian folklore masters: Cantalicio Rojas, Leonardo Laverde, Jorge Velosa and Carlos Alberto Rodríguez Molina. A declaration of love for the Andean tradition of Tolima Grande.','l-team':'The ensemble','l-gal':'Visual archive','c1':'Email','c2':'WhatsApp','fol':'Follow us','ft':'Natagaima, Tolima, Colombia · The heartbeat of Pijao territory · © 2026'}
   };
   let lang='es';
   function toggleLang(){
@@ -439,12 +562,49 @@
       if(el)el.textContent=v;
     }
   }
+
+  /* ── MOBILE MENU ── */
   function toggleMenu(){
     document.getElementById('nav-links').classList.toggle('open');
   }
   function closeMenu(){
     document.getElementById('nav-links').classList.remove('open');
   }
+
+  /* ── LIGHTBOX ── */
+  const photos = [
+    {src:'DDP06546.jpg', cap:'Ensamble Cantaima'},
+    {src:'DDP06567.jpg', cap:'Retrato grupal'},
+    {src:'DDP06601.jpg', cap:'Ensamble Cantaima 2025'},
+    {src:'DDP06558.jpg', cap:'Natagaima, Tolima'},
+    {src:'DDP06682.jpg', cap:'Estudio de grabación'},
+    {src:'IMG-20251120-WA0000.jpg', cap:'Concierto — Ensamble Cantaima'},
+    {src:'Cantaima_2025_-70.jpg', cap:'Sesión fotográfica 2025'},
+    {src:'IMG_0204__1_.JPG', cap:'Festival Turpial Cafetero 2025'},
+  ];
+  let currentPhoto = 0;
+  function openLightbox(i){
+    currentPhoto=i;
+    document.getElementById('lightbox-img').src=photos[i].src;
+    document.getElementById('lightbox-caption').textContent=photos[i].cap;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeLightbox(e){
+    if(!e||e.target===document.getElementById('lightbox')||e.target===document.getElementById('lightbox-close')){
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow='';
+    }
+  }
+  function prevPhoto(e){e.stopPropagation();currentPhoto=(currentPhoto-1+photos.length)%photos.length;document.getElementById('lightbox-img').src=photos[currentPhoto].src;document.getElementById('lightbox-caption').textContent=photos[currentPhoto].cap;}
+  function nextPhoto(e){e.stopPropagation();currentPhoto=(currentPhoto+1)%photos.length;document.getElementById('lightbox-img').src=photos[currentPhoto].src;document.getElementById('lightbox-caption').textContent=photos[currentPhoto].cap;}
+  document.addEventListener('keydown',e=>{
+    if(document.getElementById('lightbox').classList.contains('open')){
+      if(e.key==='ArrowLeft')prevPhoto(e);
+      if(e.key==='ArrowRight')nextPhoto(e);
+      if(e.key==='Escape')closeLightbox();
+    }
+  });
   document.querySelectorAll('a[href^="#"]').forEach(a=>{
     a.addEventListener('click',e=>{
       const target=document.querySelector(a.getAttribute('href'));
