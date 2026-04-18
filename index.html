@@ -137,6 +137,18 @@
 
     hr.hr{border:none;border-top:1px solid rgba(200,168,75,.07);margin:0}
 
+    /* ── PRESS ── */
+    .press-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:rgba(200,168,75,.08);border:1px solid rgba(200,168,75,.08);margin-top:2.5rem}
+    .press-card{background:var(--blk);padding:1.6rem 1.4rem;border-left:2px solid transparent;transition:border-color .25s}
+    .press-card:hover{border-left-color:var(--gold)}
+    .press-card.cert{border-left:2px solid rgba(200,168,75,.3)}
+    .press-source{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;font-weight:400}
+    .press-date{font-size:9px;letter-spacing:1px;color:var(--muted);margin-bottom:.8rem;font-weight:300}
+    .press-title{font-family:'Playfair Display',serif;font-size:1rem;color:var(--wht);line-height:1.4;margin-bottom:.8rem;font-style:italic}
+    .press-body{font-size:13px;color:rgba(244,240,232,.45);line-height:1.8;font-weight:300}
+    @media(max-width:640px){.press-grid{grid-template-columns:1fr}}
+
+
     /* ── GALLERY ── */
     .gallery-grid{
       display:grid;
@@ -237,6 +249,7 @@
     <a href="#videos" onclick="closeMenu()">Videos</a>
     <a href="#trayectoria" onclick="closeMenu()">Trayectoria</a>
     <a href="#galeria" onclick="closeMenu()">Galería</a>
+    <a href="#prensa" onclick="closeMenu()" id="nav-press">Prensa</a>
     <a href="#contacto" onclick="closeMenu()">Contacto</a>
     <button class="lang-btn" id="lb" onclick="toggleLang()">EN</button>
   </div>
@@ -494,25 +507,25 @@
   <h2 class="sec-title"><em>Galería</em></h2>
   <div class="gallery-grid">
     <div class="gallery-item wide" onclick="openLightbox(0)">
-      <img src="img/DDP06546.JPG" alt="Ensamble Cantaima con instrumentos" loading="lazy"/>
+      <img src="img/DDP06546.jpg" alt="Ensamble Cantaima con instrumentos" loading="lazy"/>
     </div>
     <div class="gallery-item" onclick="openLightbox(1)">
-      <img src="img/foto2.JPG" alt="Ensamble Cantaima — retrato grupal" loading="lazy"/>
+      <img src="img/foto2.jpg" alt="Ensamble Cantaima — retrato grupal" loading="lazy"/>
     </div>
     <div class="gallery-item" onclick="openLightbox(2)">
-      <img src="img/formacion.JPG" alt="Ensamble Cantaima — formación" loading="lazy"/>
+      <img src="img/formacion.jpg" alt="Ensamble Cantaima — formación" loading="lazy"/>
     </div>
     <div class="gallery-item wide" onclick="openLightbox(3)">
-      <img src="img/foto4.JPG" alt="Ensamble Cantaima sentados" loading="lazy"/>
+      <img src="img/foto4.jpg" alt="Ensamble Cantaima sentados" loading="lazy"/>
     </div>
     <div class="gallery-item" onclick="openLightbox(4)">
-      <img src="img/estudio.JPG" alt="Ensamble Cantaima — estudio de grabación" loading="lazy"/>
+      <img src="img/estudio.jpg" alt="Ensamble Cantaima — estudio de grabación" loading="lazy"/>
     </div>
     <div class="gallery-item" onclick="openLightbox(5)">
-      <img src="img/IMG-20251120-WA0000.JPG" alt="Ensamble Cantaima en concierto" loading="lazy"/>
+      <img src="img/IMG-20251120-WA0000.jpg" alt="Ensamble Cantaima en concierto" loading="lazy"/>
     </div>
     <div class="gallery-item wide" onclick="openLightbox(6)">
-      <img src="img/Cantaima_2025_-70.JPG" alt="Ensamble Cantaima — sesión 2025" loading="lazy"/>
+      <img src="img/Cantaima_2025_-70.jpg" alt="Ensamble Cantaima — sesión 2025" loading="lazy"/>
     </div>
     <div class="gallery-item wide" onclick="openLightbox(7)">
       <img src="img/foto6.JPG" alt="Ensamble Cantaima — Festival Turpial Cafetero" loading="lazy"/>
@@ -530,6 +543,84 @@
 </div>
 
 <hr class="hr"/>
+
+
+<!-- LEAF PRENSA -->
+<div class="leaf-sep" aria-hidden="true">
+  <svg viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="20" x2="42" y2="20" stroke="#c8a84b" stroke-width="0.6" opacity=".35"/>
+    <path d="M42 20 Q60 6 78 20 Q60 34 42 20Z" fill="#c8a84b" opacity=".18"/>
+    <line x1="78" y1="20" x2="120" y2="20" stroke="#c8a84b" stroke-width="0.6" opacity=".35"/>
+    <circle cx="60" cy="20" r="1.8" fill="#c8a84b" opacity=".6"/>
+  </svg>
+</div>
+
+<!-- PRENSA -->
+<div class="panel" id="prensa">
+  <div class="panel-inner">
+    <div class="sec-label" id="l-press">En los medios</div>
+    <h2 class="sec-title"><em>Prensa</em></h2>
+    <div class="press-grid">
+
+      <div class="press-card">
+        <div class="press-source">El Nuevo Día</div>
+        <div class="press-date">Noviembre 2021</div>
+        <div class="press-title">"Ensamble Cantaima, niños tolimenses que dignifican la música tradicional colombiana"</div>
+        <div class="press-body">Reportaje sobre la agrupación y su papel en la preservación del folclor colombiano desde Natagaima, Tolima.</div>
+      </div>
+
+      <div class="press-card">
+        <div class="press-source">El Nuevo Día — Cultural</div>
+        <div class="press-date">Noviembre 2016</div>
+        <div class="press-title">"Que los niños sigan tocando nuestras melodías autóctonas"</div>
+        <div class="press-body">Cobertura del Encuentro Departamental de Música Tradicional, destacando al Ensamble Cantalicio Rojas de Natagaima como referente del folclor tolimense.</div>
+      </div>
+
+      <div class="press-card">
+        <div class="press-source">El Nuevo Día — Cultural</div>
+        <div class="press-date">Marzo 2018</div>
+        <div class="press-title">"La obra del hijo del Tolima Grande, continúa imperante"</div>
+        <div class="press-body">El ensamble es destacado como semillero del folclor y tercer lugar en la categoría Semilleros del IX Concurso Departamental Cantalicio Rojas.</div>
+      </div>
+
+      <div class="press-card">
+        <div class="press-source">El Nuevo Día — Sociedad</div>
+        <div class="press-date">Julio 2020</div>
+        <div class="press-title">"Los niños del Ensamble Cantalicio Rojas le rinden homenaje al Tolima"</div>
+        <div class="press-body">En medio del confinamiento, el ensamble lanzó el videoclip de "El Contrabandista" grabado desde los hogares de cada integrante en distintos municipios del Tolima.</div>
+      </div>
+
+      <div class="press-card cert">
+        <div class="press-source">Alcaldía de Ibagué · Secretaría de Cultura</div>
+        <div class="press-date">Junio 2025</div>
+        <div class="press-title">Certificación — 51° Festival Folclórico Colombiano</div>
+        <div class="press-body">Ensamble Cantaima participa en el encuentro municipal del folclor en el marco del 51° Festival Folclórico Colombiano "Patrimonio Cultural y Artístico de la Nación".</div>
+      </div>
+
+      <div class="press-card cert">
+        <div class="press-source">CATUFA CIC UK · Semillas de Bolivia UK</div>
+        <div class="press-date">Octubre 2023 · Londres</div>
+        <div class="press-title">Certificación — Festival Internacional de Colonias</div>
+        <div class="press-body">Ensamble Musical Cantaima representa a Colombia en la celebración del Día Nacional de la Cueca Boliviana en Londres, Reino Unido.</div>
+      </div>
+
+      <div class="press-card cert">
+        <div class="press-source">Fundación Musical de Colombia</div>
+        <div class="press-date">Ibagué</div>
+        <div class="press-title">Distinción "Amigo de la Fundación Musical de Colombia"</div>
+        <div class="press-body">Reconocimiento otorgado por el Consejo Directivo de la Fundación Musical de Colombia en virtud del aporte al Festival Nacional de la Música Colombiana.</div>
+      </div>
+
+      <div class="press-card">
+        <div class="press-source">Ibagué Festival</div>
+        <div class="press-date">2021</div>
+        <div class="press-title">Proyecto Musical "¡Avíspese a Tocar!"</div>
+        <div class="press-body">Serie educativa en YouTube para que niños y jóvenes aprendan los ritmos tradicionales del Tolima, destacada en el marco del Ibagué Festival.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer class="site-footer">
@@ -573,13 +664,13 @@
 
   /* ── LIGHTBOX ── */
   const photos = [
-    {src:'img/DDP06546.JPG', cap:'Ensamble Cantaima'},
-    {src:'img/foto2.JPG', cap:'Retrato grupal'},
-    {src:'img/formacion.JPG', cap:'Ensamble Cantaima 2025'},
-    {src:'img/foto4.JPG', cap:'Natagaima, Tolima'},
-    {src:'img/estudio.JPG', cap:'Estudio de grabación'},
-    {src:'img/IMG-20251120-WA0000.JPG', cap:'Concierto — Ensamble Cantaima'},
-    {src:'img/Cantaima_2025_-70.JPG', cap:'Sesión fotográfica 2025'},
+    {src:'img/DDP06546.jpg', cap:'Ensamble Cantaima'},
+    {src:'img/foto2.jpg', cap:'Retrato grupal'},
+    {src:'img/formacion.jpg', cap:'Ensamble Cantaima 2025'},
+    {src:'img/foto4.jpg', cap:'Natagaima, Tolima'},
+    {src:'img/estudio.jpg', cap:'Estudio de grabación'},
+    {src:'img/IMG-20251120-WA0000.jpg', cap:'Concierto — Ensamble Cantaima'},
+    {src:'img/Cantaima_2025_-70.jpg', cap:'Sesión fotográfica 2025'},
     {src:'img/foto6.JPG', cap:'Festival Turpial Cafetero 2025'},
   ];
   let currentPhoto = 0;
