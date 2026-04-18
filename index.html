@@ -137,6 +137,12 @@
 
     hr.hr{border:none;border-top:1px solid rgba(200,168,75,.07);margin:0}
 
+
+    /* ── PILLAR IMAGES ── */
+    .pillar-img{width:100%;overflow:hidden;margin-bottom:1.2rem}
+    .pillar-img img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:brightness(.75) grayscale(10%);transition:filter .4s}
+    .pillar:hover .pillar-img img{filter:brightness(.9) grayscale(0%)}
+
     /* ── ABOUT PHOTO ── */
     .about-photo{width:100%;overflow:hidden;border:1px solid rgba(200,168,75,.15)}
     .about-photo img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:grayscale(15%) brightness(.9);transition:filter .4s}
@@ -331,9 +337,18 @@
     <h2 class="sec-title">El <em>espectáculo</em></h2>
     <p class="body-txt" id="show-p" style="max-width:600px">Un viaje escénico desde el Tolima a través del pasillo, bambuco, caña, rajaleña, sanjuanero y carranga. Con recursos visuales en pantalla y un personaje conductor que interactúa con el público.</p>
     <div class="pillars">
-      <div class="pillar"><div class="pillar-n">01</div><div class="pillar-t" id="p1t">La raíz</div><p class="pillar-d" id="p1d">Conexión con el origen y la identidad del territorio pijao.</p></div>
-      <div class="pillar"><div class="pillar-n">02</div><div class="pillar-t" id="p2t">La resistencia</div><p class="pillar-d" id="p2d">La tradición viva que se reinventa en cada escenario.</p></div>
-      <div class="pillar"><div class="pillar-n">03</div><div class="pillar-t" id="p3t">La fiesta</div><p class="pillar-d" id="p3d">La música como expresión colectiva que celebra la vida.</p></div>
+      <div class="pillar">
+        <div class="pillar-img"><img src="img/raiz.jpeg" alt="La Raíz — Ensamble Cantaima" loading="lazy"/></div>
+        <div class="pillar-n">01</div><div class="pillar-t" id="p1t">La raíz</div><p class="pillar-d" id="p1d">Conexión con el origen y la identidad del territorio pijao.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-img"><img src="img/resistencia.jpeg" alt="La Resistencia — Ensamble Cantaima" loading="lazy"/></div>
+        <div class="pillar-n">02</div><div class="pillar-t" id="p2t">La resistencia</div><p class="pillar-d" id="p2d">La tradición viva que se reinventa en cada escenario.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-img"><img src="img/fiesta.png" alt="La Fiesta — Ensamble Cantaima" loading="lazy"/></div>
+        <div class="pillar-n">03</div><div class="pillar-t" id="p3t">La fiesta</div><p class="pillar-d" id="p3d">La música como expresión colectiva que celebra la vida.</p>
+      </div>
     </div>
     <div class="tags">
       <span class="tag">Guitarra</span><span class="tag">Tiple</span><span class="tag">Bandola</span>
