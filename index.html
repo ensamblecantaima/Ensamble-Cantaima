@@ -66,6 +66,34 @@
     html{scroll-behavior:smooth}
     body{background:var(--blk);color:var(--wht);font-family:'Inter',sans-serif;overflow-x:hidden}
 
+    /* ── SCROLL REVEAL ── */
+    .reveal{
+      opacity:0;
+      transform:translateY(36px);
+      transition:opacity 0.75s cubic-bezier(.22,.61,.36,1), transform 0.75s cubic-bezier(.22,.61,.36,1);
+    }
+    .reveal.from-left{
+      transform:translateX(-40px);
+    }
+    .reveal.from-right{
+      transform:translateX(40px);
+    }
+    .reveal.scale-in{
+      transform:translateY(20px) scale(0.97);
+    }
+    .reveal.visible{
+      opacity:1;
+      transform:none;
+    }
+    .reveal.d1{transition-delay:.08s}
+    .reveal.d2{transition-delay:.16s}
+    .reveal.d3{transition-delay:.24s}
+    .reveal.d4{transition-delay:.32s}
+    .reveal.d5{transition-delay:.40s}
+    .reveal.d6{transition-delay:.48s}
+    .reveal.d7{transition-delay:.56s}
+    .reveal.d8{transition-delay:.64s}
+
     /* ── NAV ── */
     nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:64px;background:rgba(8,8,7,0.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(200,168,75,0.08)}
     .nav-brand{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--wht);cursor:pointer;text-decoration:none}
@@ -92,6 +120,17 @@
     .btn-gold:hover{opacity:.85}
     .btn-outline{padding:14px 36px;background:transparent;color:var(--wht);border:1px solid rgba(244,240,232,.3);font-size:10px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-family:'Inter',sans-serif;font-weight:400;transition:all .2s;text-decoration:none;display:inline-block}
     .btn-outline:hover{border-color:var(--wht)}
+
+    /* Hero entrada animada */
+    .hero-eyebrow{animation:heroFadeUp .9s cubic-bezier(.22,.61,.36,1) .3s both}
+    .hero-name{animation:heroFadeUp 1s cubic-bezier(.22,.61,.36,1) .5s both}
+    .hero-subtitle{animation:heroFadeUp .9s cubic-bezier(.22,.61,.36,1) .7s both}
+    .hero-tagline{animation:heroFadeUp .9s cubic-bezier(.22,.61,.36,1) .9s both}
+    .hero-btns{animation:heroFadeUp .9s cubic-bezier(.22,.61,.36,1) 1.05s both}
+    @keyframes heroFadeUp{
+      from{opacity:0;transform:translateY(28px)}
+      to{opacity:1;transform:translateY(0)}
+    }
 
     /* ── LEAF ORNAMENT ── */
     .leaf-sep{display:flex;justify-content:center;align-items:center;padding:3rem 0 1rem;opacity:.4}
@@ -185,7 +224,6 @@
 
     hr.hr{border:none;border-top:1px solid rgba(200,168,75,.07);margin:0}
 
-
     /* ── PILLAR IMAGES ── */
     .pillar-img{width:100%;overflow:hidden;margin-bottom:1.2rem}
     .pillar-img img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:brightness(.75) grayscale(10%);transition:filter .4s}
@@ -195,7 +233,6 @@
     .about-photo{width:100%;overflow:hidden;border:1px solid rgba(200,168,75,.15)}
     .about-photo img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:grayscale(15%) brightness(.9);transition:filter .4s}
     .about-photo:hover img{filter:grayscale(0%) brightness(1)}
-
 
     /* ── PRESS ── */
     .press-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:rgba(200,168,75,.08);border:1px solid rgba(200,168,75,.08);margin-top:2.5rem}
@@ -208,76 +245,29 @@
     .press-body{font-size:13px;color:rgba(244,240,232,.45);line-height:1.8;font-weight:300}
     @media(max-width:640px){.press-grid{grid-template-columns:1fr}}
 
-
     /* ── GALLERY ── */
-    .gallery-grid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:3px;
-      margin-top:2.5rem;
-    }
-    .gallery-item{
-      position:relative;
-      overflow:hidden;
-      aspect-ratio:1;
-      cursor:pointer;
-      background:#111;
-    }
-    .gallery-item img{
-      width:100%;height:100%;
-      object-fit:cover;
-      display:block;
-      transition:transform .5s ease, filter .4s ease;
-      filter:grayscale(20%) brightness(.85);
-    }
-    .gallery-item:hover img{
-      transform:scale(1.06);
-      filter:grayscale(0%) brightness(1);
-    }
-    .gallery-item.wide{grid-column:span 2;}
-    .gallery-item.tall{grid-row:span 2;}
+    .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin-top:2.5rem}
+    .gallery-item{position:relative;overflow:hidden;aspect-ratio:1;cursor:pointer;background:#111}
+    .gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease, filter .4s ease;filter:grayscale(20%) brightness(.85)}
+    .gallery-item:hover img{transform:scale(1.06);filter:grayscale(0%) brightness(1)}
+    .gallery-item.wide{grid-column:span 2}
+    .gallery-item.tall{grid-row:span 2}
 
     /* LIGHTBOX */
-    #lightbox{
-      display:none;position:fixed;inset:0;z-index:9999;
-      background:rgba(0,0,0,.94);
-      align-items:center;justify-content:center;
-      cursor:zoom-out;
-    }
-    #lightbox.open{display:flex;}
-    #lightbox img{
-      max-width:92vw;max-height:92vh;
-      object-fit:contain;
-      border:1px solid rgba(200,168,75,.15);
-    }
-    #lightbox-close{
-      position:absolute;top:1.5rem;right:2rem;
-      font-size:28px;color:rgba(244,240,232,.5);
-      cursor:pointer;background:none;border:none;
-      font-family:'Inter',sans-serif;line-height:1;
-      transition:color .2s;
-    }
-    #lightbox-close:hover{color:var(--gold);}
-    #lightbox-prev,#lightbox-next{
-      position:absolute;top:50%;transform:translateY(-50%);
-      background:none;border:1px solid rgba(200,168,75,.3);
-      color:var(--gold);font-size:18px;width:44px;height:44px;
-      display:flex;align-items:center;justify-content:center;
-      cursor:pointer;transition:all .2s;
-    }
-    #lightbox-prev{left:1.5rem;}
-    #lightbox-next{right:1.5rem;}
-    #lightbox-prev:hover,#lightbox-next:hover{background:rgba(200,168,75,.12);border-color:var(--gold);}
-    #lightbox-caption{
-      position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);
-      font-size:10px;letter-spacing:2px;text-transform:uppercase;
-      color:rgba(200,168,75,.6);font-family:'Inter',sans-serif;
-      white-space:nowrap;
-    }
+    #lightbox{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.94);align-items:center;justify-content:center;cursor:zoom-out}
+    #lightbox.open{display:flex}
+    #lightbox img{max-width:92vw;max-height:92vh;object-fit:contain;border:1px solid rgba(200,168,75,.15)}
+    #lightbox-close{position:absolute;top:1.5rem;right:2rem;font-size:28px;color:rgba(244,240,232,.5);cursor:pointer;background:none;border:none;font-family:'Inter',sans-serif;line-height:1;transition:color .2s}
+    #lightbox-close:hover{color:var(--gold)}
+    #lightbox-prev,#lightbox-next{position:absolute;top:50%;transform:translateY(-50%);background:none;border:1px solid rgba(200,168,75,.3);color:var(--gold);font-size:18px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s}
+    #lightbox-prev{left:1.5rem}
+    #lightbox-next{right:1.5rem}
+    #lightbox-prev:hover,#lightbox-next:hover{background:rgba(200,168,75,.12);border-color:var(--gold)}
+    #lightbox-caption{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(200,168,75,.6);font-family:'Inter',sans-serif;white-space:nowrap}
 
     @media(max-width:640px){
-      .gallery-grid{grid-template-columns:repeat(2,1fr);}
-      .gallery-item.wide{grid-column:span 1;}
+      .gallery-grid{grid-template-columns:repeat(2,1fr)}
+      .gallery-item.wide{grid-column:span 1}
     }
 
     /* ── MOBILE ── */
@@ -295,6 +285,13 @@
     }
     @media(max-width:480px){
       .team{grid-template-columns:repeat(2,1fr)}
+    }
+
+    /* Respeta preferencia de movimiento reducido */
+    @media(prefers-reduced-motion:reduce){
+      .reveal,.hero-eyebrow,.hero-name,.hero-subtitle,.hero-tagline,.hero-btns{
+        opacity:1 !important;transform:none !important;animation:none !important;transition:none !important;
+      }
     }
   </style>
 </head>
@@ -338,7 +335,7 @@
 </div>
 
 <!-- LEAF 1 -->
-<div class="leaf-sep" aria-hidden="true">
+<div class="leaf-sep reveal" aria-hidden="true">
   <svg viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M10 20 Q30 6 60 20 Q90 34 110 20" stroke="#c8a84b" stroke-width="0.8" fill="none"/>
     <path d="M60 20 Q58 8 68 10 Q72 11 70 18" stroke="#c8a84b" stroke-width="0.6" fill="none"/>
@@ -352,17 +349,17 @@
 
 <!-- NOSOTROS -->
 <section id="nosotros">
-  <div class="sec-label" id="l-who">Perfil artístico</div>
-  <h2 class="sec-title">Quiénes <em>somos</em></h2>
+  <div class="sec-label reveal" id="l-who">Perfil artístico</div>
+  <h2 class="sec-title reveal">Quiénes <em>somos</em></h2>
   <div class="about-grid">
     <div>
-      <p class="body-txt" id="a1">Ensamble Cantaima es una agrupación de música andina colombiana fundada el 18 de marzo de 2013 en Natagaima, Tolima — territorio reconocido como cuna de grandes referentes del folclor colombiano.</p>
+      <p class="body-txt reveal" id="a1">Ensamble Cantaima es una agrupación de música andina colombiana fundada el 18 de marzo de 2013 en Natagaima, Tolima — territorio reconocido como cuna de grandes referentes del folclor colombiano.</p>
       <br/>
-      <p class="body-txt" id="a2">Nacimos como Ensamble Cantalicio Rojas y en 2021 consolidamos nuestra identidad actual, fortaleciendo nuestra propuesta escénica y proyección internacional. Nuestros 8 músicos representan la diversidad del Tolima: Ortega, Natagaima, Carmen de Apicalá, Cajamarca e Ibagué.</p>
+      <p class="body-txt reveal d1" id="a2">Nacimos como Ensamble Cantalicio Rojas y en 2021 consolidamos nuestra identidad actual, fortaleciendo nuestra propuesta escénica y proyección internacional. Nuestros 8 músicos representan la diversidad del Tolima: Ortega, Natagaima, Carmen de Apicalá, Cajamarca e Ibagué.</p>
       <br/>
-      <p class="body-txt" id="a3">En 2023 creamos <em>Avíspese a Tocar</em>, una serie educativa en YouTube para que niños y jóvenes aprendan los ritmos tradicionales del Tolima.</p>
+      <p class="body-txt reveal d2" id="a3">En 2023 creamos <em>Avíspese a Tocar</em>, una serie educativa en YouTube para que niños y jóvenes aprendan los ritmos tradicionales del Tolima.</p>
     </div>
-    <div>
+    <div class="reveal from-right">
       <div class="about-photo">
         <img src="img/formacion.jpg" alt="Ensamble Cantaima" loading="lazy"/>
       </div>
@@ -381,24 +378,24 @@
 <!-- ESPECTACULO -->
 <div id="espectaculo" class="panel">
   <div class="panel-inner">
-    <div class="sec-label" id="l-show">En vivo</div>
-    <h2 class="sec-title">El <em>espectáculo</em></h2>
-    <p class="body-txt" id="show-p" style="max-width:600px">Un viaje escénico desde el Tolima a través del pasillo, bambuco, caña, rajaleña, sanjuanero y carranga. Con recursos visuales en pantalla y un personaje conductor que interactúa con el público.</p>
+    <div class="sec-label reveal" id="l-show">En vivo</div>
+    <h2 class="sec-title reveal">El <em>espectáculo</em></h2>
+    <p class="body-txt reveal" id="show-p" style="max-width:600px">Un viaje escénico desde el Tolima a través del pasillo, bambuco, caña, rajaleña, sanjuanero y carranga. Con recursos visuales en pantalla y un personaje conductor que interactúa con el público.</p>
     <div class="pillars">
-      <div class="pillar">
+      <div class="pillar reveal d1">
         <div class="pillar-img"><img src="img/raiz.jpeg" alt="La Raíz — Ensamble Cantaima" loading="lazy"/></div>
         <div class="pillar-n">01</div><div class="pillar-t" id="p1t">La raíz</div><p class="pillar-d" id="p1d">Conexión con el origen y la identidad del territorio pijao.</p>
       </div>
-      <div class="pillar">
+      <div class="pillar reveal d2">
         <div class="pillar-img"><img src="img/resistencia.jpeg" alt="La Resistencia — Ensamble Cantaima" loading="lazy"/></div>
         <div class="pillar-n">02</div><div class="pillar-t" id="p2t">La resistencia</div><p class="pillar-d" id="p2d">La tradición viva que se reinventa en cada escenario.</p>
       </div>
-      <div class="pillar">
+      <div class="pillar reveal d3">
         <div class="pillar-img"><img src="img/fiesta.png" alt="La Fiesta — Ensamble Cantaima" loading="lazy"/></div>
         <div class="pillar-n">03</div><div class="pillar-t" id="p3t">La fiesta</div><p class="pillar-d" id="p3d">La música como expresión colectiva que celebra la vida.</p>
       </div>
     </div>
-    <div class="tags">
+    <div class="tags reveal">
       <span class="tag">Guitarra</span><span class="tag">Tiple</span><span class="tag">Bandola</span>
       <span class="tag">Flauta</span><span class="tag">Percusión folclórica</span><span class="tag">Voces</span>
       <span class="tag">50 minutos</span><span class="tag">8 músicos</span>
@@ -409,7 +406,7 @@
 <hr class="hr"/>
 
 <!-- LEAF 2 -->
-<div class="leaf-sep" aria-hidden="true">
+<div class="leaf-sep reveal" aria-hidden="true">
   <svg viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
     <line x1="0" y1="20" x2="42" y2="20" stroke="#c8a84b" stroke-width="0.6" opacity=".35"/>
     <path d="M42 20 Q60 6 78 20 Q60 34 42 20Z" fill="#c8a84b" opacity=".18"/>
@@ -420,10 +417,10 @@
 
 <!-- VIDEOS -->
 <section id="videos">
-  <div class="sec-label" id="l-vid">Audiovisual</div>
-  <h2 class="sec-title"><em>Videos</em></h2>
+  <div class="sec-label reveal" id="l-vid">Audiovisual</div>
+  <h2 class="sec-title reveal"><em>Videos</em></h2>
   <div class="vids-grid">
-    <div class="vid-wrap">
+    <div class="vid-wrap reveal d1">
       <iframe src="https://www.youtube.com/embed/rySD0A6Dl0o?rel=0&modestbranding=1"
         allow="encrypted-media" allowfullscreen loading="lazy" title="San Juan y San Pedro"></iframe>
       <div class="vid-info">
@@ -431,7 +428,7 @@
         <div class="vid-tag">Live Session</div>
       </div>
     </div>
-    <div class="vid-wrap">
+    <div class="vid-wrap reveal d2">
       <iframe src="https://www.youtube.com/embed/rcOcLq6p9nE?rel=0&modestbranding=1"
         allow="encrypted-media" allowfullscreen loading="lazy" title="Cantaima en Vivo"></iframe>
       <div class="vid-info">
@@ -440,7 +437,7 @@
       </div>
     </div>
   </div>
-  <div style="text-align:center;margin-top:2rem">
+  <div style="text-align:center;margin-top:2rem" class="reveal">
     <a class="btn-outline" href="https://www.youtube.com/@Ensamble_cantaima" target="_blank" rel="noopener" id="ytbtn">Ver canal en YouTube</a>
   </div>
 </section>
@@ -449,10 +446,10 @@
 
 <!-- TRAYECTORIA -->
 <section id="trayectoria">
-  <div class="sec-label" id="l-tray">Historia</div>
-  <h2 class="sec-title">Trayectoria y <em>circulación</em></h2>
+  <div class="sec-label reveal" id="l-tray">Historia</div>
+  <h2 class="sec-title reveal">Trayectoria y <em>circulación</em></h2>
   <div class="tl-cols">
-    <div>
+    <div class="reveal from-left">
       <div class="tl-head" id="intl">Internacional</div>
       <div class="tl">
         <div class="tl-item"><div class="tl-dot"></div><div class="tl-yr">2025</div><p class="tl-ev">Embajadores del folclor colombiano — Londres, Reino Unido</p></div>
@@ -461,7 +458,7 @@
         <div class="tl-item"><div class="tl-dot"></div><div class="tl-yr">2015</div><p class="tl-ev">Gira Chile</p></div>
       </div>
     </div>
-    <div>
+    <div class="reveal from-right">
       <div class="tl-head" id="nac">Nacional</div>
       <div class="tl">
         <div class="tl-item"><div class="tl-dot"></div><div class="tl-yr">2025</div><p class="tl-ev">32° Encuentro Nacional — Yumbo · Latinoamérica Fest · Turpial Cafetero · Beca Alcaldía de Ibagué</p></div>
@@ -476,23 +473,23 @@
 <!-- RECONOCIMIENTOS -->
 <div class="panel" id="reconocimientos">
   <div class="panel-inner">
-    <div class="sec-label" id="l-rec">Palmarés</div>
-    <h2 class="sec-title"><em>Reconocimientos</em></h2>
+    <div class="sec-label reveal" id="l-rec">Palmarés</div>
+    <h2 class="sec-title reveal"><em>Reconocimientos</em></h2>
     <div class="awards">
-      <div class="award"><div class="award-pos">1°</div><p class="award-nm">Festival Nacional de la Caña y el Bambuco Fiestero</p><div class="award-yr">2019 · Natagaima</div></div>
-      <div class="award"><div class="award-pos">1°</div><p class="award-nm">IX Concurso Departamental Cantalicio Rojas</p><div class="award-yr">2020 · Ibagué</div></div>
-      <div class="award"><div class="award-pos">1°</div><p class="award-nm">VII Concurso Cantalicio Rojas — Cat. Mayor</p><div class="award-yr">2016 · Ibagué</div></div>
-      <div class="award"><div class="award-pos">★</div><p class="award-nm">Mejor Grupo Musical — Adriano Tribín Piedrahíta</p><div class="award-yr">2019 · Ibagué</div></div>
-      <div class="award"><div class="award-pos">★</div><p class="award-nm">Mejor Grupo Musical</p><div class="award-yr">2015 · Copey, Cesar</div></div>
-      <div class="award"><div class="award-pos">2°</div><p class="award-nm">Concurso Cantalicio Rojas — Semilleros</p><div class="award-yr">2023 · Ibagué</div></div>
-      <div class="award"><div class="award-pos">2°</div><p class="award-nm">X Concurso Cantalicio Rojas</p><div class="award-yr">2018 · Ibagué</div></div>
-      <div class="award"><div class="award-pos">3°</div><p class="award-nm">Concurso Cantalicio Rojas — Cat. Profesional</p><div class="award-yr">2025 · Ibagué</div></div>
+      <div class="award reveal d1"><div class="award-pos">1°</div><p class="award-nm">Festival Nacional de la Caña y el Bambuco Fiestero</p><div class="award-yr">2019 · Natagaima</div></div>
+      <div class="award reveal d2"><div class="award-pos">1°</div><p class="award-nm">IX Concurso Departamental Cantalicio Rojas</p><div class="award-yr">2020 · Ibagué</div></div>
+      <div class="award reveal d3"><div class="award-pos">1°</div><p class="award-nm">VII Concurso Cantalicio Rojas — Cat. Mayor</p><div class="award-yr">2016 · Ibagué</div></div>
+      <div class="award reveal d4"><div class="award-pos">★</div><p class="award-nm">Mejor Grupo Musical — Adriano Tribín Piedrahíta</p><div class="award-yr">2019 · Ibagué</div></div>
+      <div class="award reveal d5"><div class="award-pos">★</div><p class="award-nm">Mejor Grupo Musical</p><div class="award-yr">2015 · Copey, Cesar</div></div>
+      <div class="award reveal d6"><div class="award-pos">2°</div><p class="award-nm">Concurso Cantalicio Rojas — Semilleros</p><div class="award-yr">2023 · Ibagué</div></div>
+      <div class="award reveal d7"><div class="award-pos">2°</div><p class="award-nm">X Concurso Cantalicio Rojas</p><div class="award-yr">2018 · Ibagué</div></div>
+      <div class="award reveal d8"><div class="award-pos">3°</div><p class="award-nm">Concurso Cantalicio Rojas — Cat. Profesional</p><div class="award-yr">2025 · Ibagué</div></div>
     </div>
   </div>
 </div>
 
 <!-- LEAF 3 -->
-<div class="leaf-sep" aria-hidden="true">
+<div class="leaf-sep reveal" aria-hidden="true">
   <svg viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M10 20 Q30 6 60 20 Q90 34 110 20" stroke="#c8a84b" stroke-width="0.8" fill="none"/>
     <path d="M60 20 Q58 8 68 10" stroke="#c8a84b" stroke-width="0.6" fill="none"/>
@@ -503,9 +500,9 @@
 
 <!-- DISCOGRAFIA -->
 <section id="discografia">
-  <div class="sec-label" id="l-disc">Música</div>
-  <h2 class="sec-title"><em>Discografía</em></h2>
-  <div class="album">
+  <div class="sec-label reveal" id="l-disc">Música</div>
+  <h2 class="sec-title reveal"><em>Discografía</em></h2>
+  <div class="album reveal scale-in">
     <a href="https://youtube.com/playlist?list=PLNcB3_b5TfT9gvTsymBAx90Wz2VltJrbQ&si=GRNHpDHaFBJWS6vf" target="_blank" rel="noopener" style="display:block;cursor:pointer" title="Escuchar en YouTube">
       <div class="album-art" style="padding:0;overflow:hidden;border:1px solid rgba(200,168,75,.2);transition:opacity .2s">
         <img src="Discografia/portada.png" alt="El Legado del Juglar — Ensamble Cantaima" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"/>
@@ -523,14 +520,14 @@
 
 <!-- EQUIPO -->
 <section id="equipo">
-  <div class="sec-label" id="l-team">El ensamble</div>
-  <h2 class="sec-title">Nuestro <em>equipo</em></h2>
+  <div class="sec-label reveal" id="l-team">El ensamble</div>
+  <h2 class="sec-title reveal">Nuestro <em>equipo</em></h2>
   <div class="team">
-    <div class="member"><div class="member-init">RB</div><div class="member-name">Román Bejarano</div><div class="member-role">Dir. General</div></div>
-    <div class="member"><div class="member-init">CH</div><div class="member-name">Camilo Hernández</div><div class="member-role">Dir. Artístico</div></div>
-    <div class="member"><div class="member-init">SP</div><div class="member-name">Santiago Poveda</div><div class="member-role">Dir. Musical</div></div>
-    <div class="member"><div class="member-init">YG</div><div class="member-name">Yeison Gómez</div><div class="member-role">Productor</div></div>
-    <div class="member"><div class="member-init">CS</div><div class="member-name">Camilo Sánchez</div><div class="member-role">Mánager</div></div>
+    <div class="member reveal d1"><div class="member-init">RB</div><div class="member-name">Román Bejarano</div><div class="member-role">Dir. General</div></div>
+    <div class="member reveal d2"><div class="member-init">CH</div><div class="member-name">Camilo Hernández</div><div class="member-role">Dir. Artístico</div></div>
+    <div class="member reveal d3"><div class="member-init">SP</div><div class="member-name">Santiago Poveda</div><div class="member-role">Dir. Musical</div></div>
+    <div class="member reveal d4"><div class="member-init">YG</div><div class="member-name">Yeison Gómez</div><div class="member-role">Productor</div></div>
+    <div class="member reveal d5"><div class="member-init">CS</div><div class="member-name">Camilo Sánchez</div><div class="member-role">Mánager</div></div>
   </div>
 </section>
 
@@ -538,10 +535,10 @@
 
 <!-- CONTACTO -->
 <section id="contacto">
-  <div class="sec-label" id="l-cnt">Bookings y prensa</div>
-  <h2 class="sec-title">Contácta<em>nos</em></h2>
+  <div class="sec-label reveal" id="l-cnt">Bookings y prensa</div>
+  <h2 class="sec-title reveal">Contácta<em>nos</em></h2>
   <div class="contact-grid">
-    <div>
+    <div class="reveal from-left">
       <div class="c-row">
         <div class="c-ico">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
@@ -555,7 +552,7 @@
         <div><div class="c-lbl" id="c2">WhatsApp</div><div class="c-val"><a href="https://wa.me/573154529419" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">+57 315 452 9419</a></div></div>
       </div>
     </div>
-    <div>
+    <div class="reveal from-right">
       <div class="socials-head" id="fol">Síguenos</div>
       <div class="socials">
         <a class="soc" href="https://www.facebook.com/ensamble_cantaima" target="_blank" rel="noopener">Facebook</a>
@@ -568,7 +565,7 @@
 </section>
 
 <!-- LEAF 4 -->
-<div class="leaf-sep" aria-hidden="true">
+<div class="leaf-sep reveal" aria-hidden="true">
   <svg viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
     <line x1="0" y1="20" x2="42" y2="20" stroke="#c8a84b" stroke-width="0.6" opacity=".35"/>
     <path d="M42 20 Q60 6 78 20 Q60 34 42 20Z" fill="#c8a84b" opacity=".18"/>
@@ -579,31 +576,31 @@
 
 <!-- GALERÍA -->
 <section id="galeria">
-  <div class="sec-label" id="l-gal">Registro visual</div>
-  <h2 class="sec-title"><em>Galería</em></h2>
+  <div class="sec-label reveal" id="l-gal">Registro visual</div>
+  <h2 class="sec-title reveal"><em>Galería</em></h2>
   <div class="gallery-grid">
-    <div class="gallery-item wide" onclick="openLightbox(0)">
+    <div class="gallery-item wide reveal d1" onclick="openLightbox(0)">
       <img src="img/DDP06546.jpg" alt="Ensamble Cantaima con instrumentos" loading="lazy"/>
     </div>
-    <div class="gallery-item" onclick="openLightbox(1)">
+    <div class="gallery-item reveal d2" onclick="openLightbox(1)">
       <img src="img/foto2.jpg" alt="Ensamble Cantaima — retrato grupal" loading="lazy"/>
     </div>
-    <div class="gallery-item" onclick="openLightbox(2)">
+    <div class="gallery-item reveal d3" onclick="openLightbox(2)">
       <img src="img/formacion.jpg" alt="Ensamble Cantaima — formación" loading="lazy"/>
     </div>
-    <div class="gallery-item wide" onclick="openLightbox(3)">
+    <div class="gallery-item wide reveal d2" onclick="openLightbox(3)">
       <img src="img/foto4.jpg" alt="Ensamble Cantaima sentados" loading="lazy"/>
     </div>
-    <div class="gallery-item" onclick="openLightbox(4)">
+    <div class="gallery-item reveal d3" onclick="openLightbox(4)">
       <img src="img/estudio.jpg" alt="Ensamble Cantaima — estudio de grabación" loading="lazy"/>
     </div>
-    <div class="gallery-item" onclick="openLightbox(5)">
+    <div class="gallery-item reveal d4" onclick="openLightbox(5)">
       <img src="img/IMG-20251120-WA0000.jpg" alt="Ensamble Cantaima en concierto" loading="lazy"/>
     </div>
-    <div class="gallery-item wide" onclick="openLightbox(6)">
+    <div class="gallery-item wide reveal d3" onclick="openLightbox(6)">
       <img src="img/Cantaima_2025_-70.jpg" alt="Ensamble Cantaima — sesión 2025" loading="lazy"/>
     </div>
-    <div class="gallery-item wide" onclick="openLightbox(7)">
+    <div class="gallery-item wide reveal d4" onclick="openLightbox(7)">
       <img src="img/foto6.JPG" alt="Ensamble Cantaima — Festival Turpial Cafetero" loading="lazy"/>
     </div>
   </div>
@@ -620,9 +617,8 @@
 
 <hr class="hr"/>
 
-
 <!-- LEAF PRENSA -->
-<div class="leaf-sep" aria-hidden="true">
+<div class="leaf-sep reveal" aria-hidden="true">
   <svg viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
     <line x1="0" y1="20" x2="42" y2="20" stroke="#c8a84b" stroke-width="0.6" opacity=".35"/>
     <path d="M42 20 Q60 6 78 20 Q60 34 42 20Z" fill="#c8a84b" opacity=".18"/>
@@ -634,72 +630,63 @@
 <!-- PRENSA -->
 <div class="panel" id="prensa">
   <div class="panel-inner">
-    <div class="sec-label" id="l-press">En los medios</div>
-    <h2 class="sec-title"><em>Prensa</em></h2>
+    <div class="sec-label reveal" id="l-press">En los medios</div>
+    <h2 class="sec-title reveal"><em>Prensa</em></h2>
     <div class="press-grid">
-
-      <div class="press-card">
+      <div class="press-card reveal d1">
         <div class="press-source">El Nuevo Día</div>
         <div class="press-date">Noviembre 2021</div>
         <div class="press-title">"Ensamble Cantaima, niños tolimenses que dignifican la música tradicional colombiana"</div>
         <div class="press-body">Reportaje sobre la agrupación y su papel en la preservación del folclor colombiano desde Natagaima, Tolima.</div>
       </div>
-
-      <div class="press-card">
+      <div class="press-card reveal d2">
         <div class="press-source">El Nuevo Día — Cultural</div>
         <div class="press-date">Noviembre 2016</div>
         <div class="press-title">"Que los niños sigan tocando nuestras melodías autóctonas"</div>
         <div class="press-body">Cobertura del Encuentro Departamental de Música Tradicional, destacando al Ensamble Cantalicio Rojas de Natagaima como referente del folclor tolimense.</div>
       </div>
-
-      <div class="press-card">
+      <div class="press-card reveal d3">
         <div class="press-source">El Nuevo Día — Cultural</div>
         <div class="press-date">Marzo 2018</div>
         <div class="press-title">"La obra del hijo del Tolima Grande, continúa imperante"</div>
         <div class="press-body">El ensamble es destacado como semillero del folclor y tercer lugar en la categoría Semilleros del IX Concurso Departamental Cantalicio Rojas.</div>
       </div>
-
-      <div class="press-card">
+      <div class="press-card reveal d4">
         <div class="press-source">El Nuevo Día — Sociedad</div>
         <div class="press-date">Julio 2020</div>
         <div class="press-title">"Los niños del Ensamble Cantalicio Rojas le rinden homenaje al Tolima"</div>
         <div class="press-body">En medio del confinamiento, el ensamble lanzó el videoclip de "El Contrabandista" grabado desde los hogares de cada integrante en distintos municipios del Tolima.</div>
       </div>
-
-      <div class="press-card cert">
+      <div class="press-card cert reveal d1">
         <div class="press-source">Alcaldía de Ibagué · Secretaría de Cultura</div>
         <div class="press-date">Junio 2025</div>
         <div class="press-title">Certificación — 51° Festival Folclórico Colombiano</div>
         <div class="press-body">Ensamble Cantaima participa en el encuentro municipal del folclor en el marco del 51° Festival Folclórico Colombiano "Patrimonio Cultural y Artístico de la Nación".</div>
       </div>
-
-      <div class="press-card cert">
+      <div class="press-card cert reveal d2">
         <div class="press-source">CATUFA CIC UK · Semillas de Bolivia UK</div>
         <div class="press-date">Octubre 2023 · Londres</div>
         <div class="press-title">Certificación — Festival Internacional de Colonias</div>
         <div class="press-body">Ensamble Musical Cantaima representa a Colombia en la celebración del Día Nacional de la Cueca Boliviana en Londres, Reino Unido.</div>
       </div>
-
-      <div class="press-card cert">
+      <div class="press-card cert reveal d3">
         <div class="press-source">Fundación Musical de Colombia</div>
         <div class="press-date">Ibagué</div>
         <div class="press-title">Distinción "Amigo de la Fundación Musical de Colombia"</div>
         <div class="press-body">Reconocimiento otorgado por el Consejo Directivo de la Fundación Musical de Colombia en virtud del aporte al Festival Nacional de la Música Colombiana.</div>
       </div>
-
-      <div class="press-card">
+      <div class="press-card reveal d4">
         <div class="press-source">Ibagué Festival</div>
         <div class="press-date">2021</div>
         <div class="press-title">Proyecto Musical "¡Avíspese a Tocar!"</div>
         <div class="press-body">Serie educativa en YouTube para que niños y jóvenes aprendan los ritmos tradicionales del Tolima, destacada en el marco del Ibagué Festival.</div>
       </div>
-
     </div>
   </div>
 </div>
 
 <!-- FOOTER -->
-<footer class="site-footer">
+<footer class="site-footer reveal">
   <svg class="footer-leaf" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path d="M180 180 Q120 100 60 160 Q40 180 20 170 Q60 120 100 80 Q140 40 180 20 Q200 80 180 180Z" fill="#c8a84b"/>
     <path d="M140 140 Q100 110 80 130" stroke="#080807" stroke-width="1" fill="none"/>
@@ -712,7 +699,39 @@
   <p class="footer-txt" id="ft">Natagaima, Tolima, Colombia &nbsp;·&nbsp; El latido del territorio pijao &nbsp;·&nbsp; © 2026</p>
 </footer>
 
+<!-- BOTÓN FLOTANTE WHATSAPP -->
+<a href="https://wa.me/573154529419?text=Hola%20Ensamble%20Cantaima%2C%20me%20interesa%20obtener%20m%C3%A1s%20informaci%C3%B3n"
+   target="_blank" rel="noopener" id="wa-btn" aria-label="Contactar por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<style>
+#wa-btn{position:fixed;bottom:2rem;right:2rem;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.4);z-index:9999;transition:transform .2s,box-shadow .2s}
+#wa-btn:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,0.6)}
+#wa-btn svg{width:28px;height:28px}
+</style>
+
 <script>
+  /* ── SCROLL REVEAL con IntersectionObserver ── */
+  (function(){
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          // Una vez visible, dejamos de observar para no re-animar
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  })();
+
   /* ── LANG ── */
   const T={
     es:{'h-ey':'El latido del territorio pijao','h-sub':'Música andina colombiana','h-tag':'Desde Natagaima, Tolima, llevamos el alma del folclor a escenarios de todo el mundo desde 2013.','h-b1':'El espectáculo','h-b2':'Contáctanos','l-who':'Perfil artístico','a1':'Ensamble Cantaima es una agrupación de música andina colombiana fundada el 18 de marzo de 2013 en Natagaima, Tolima — territorio reconocido como cuna de grandes referentes del folclor colombiano.','a2':'Nacimos como Ensamble Cantalicio Rojas y en 2021 consolidamos nuestra identidad actual, fortaleciendo nuestra propuesta escénica y proyección internacional. Nuestros 8 músicos representan la diversidad del Tolima: Ortega, Natagaima, Carmen de Apicalá, Cajamarca e Ibagué.','a3':'En 2023 creamos Avíspese a Tocar, una serie educativa en YouTube para que niños y jóvenes aprendan los ritmos tradicionales del Tolima.','s1':'Fundación','s2':'Músicos','s3':'Países','s4':'Premios','l-show':'En vivo','show-p':'Un viaje escénico desde el Tolima a través del pasillo, bambuco, caña, rajaleña, sanjuanero y carranga. Con recursos visuales en pantalla y un personaje conductor que interactúa con el público.','p1t':'La raíz','p1d':'Conexión con el origen y la identidad del territorio pijao.','p2t':'La resistencia','p2d':'La tradición viva que se reinventa en cada escenario.','p3t':'La fiesta','p3d':'La música como expresión colectiva que celebra la vida.','l-vid':'Audiovisual','v1':'San Juan y San Pedro (Cover)','v2':'Cantaima en Vivo','ytbtn':'Ver canal en YouTube','l-tray':'Historia','intl':'Internacional','nac':'Nacional','l-rec':'Palmarés','l-disc':'Música','alb':'10 composiciones de maestros del folclor colombiano: Cantalicio Rojas, Leonardo Laverde, Jorge Velosa y Carlos Alberto Rodríguez Molina. Una declaración de amor a la tradición andina del Tolima Grande.','l-team':'El ensamble','l-gal':'Registro visual','c1':'Correo','c2':'WhatsApp','fol':'Síguenos','ft':'Natagaima, Tolima, Colombia · El latido del territorio pijao · © 2026'},
@@ -739,17 +758,17 @@
   }
 
   /* ── LIGHTBOX ── */
-  const photos = [
-    {src:'img/DDP06546.jpg', cap:'Ensamble Cantaima'},
-    {src:'img/foto2.jpg', cap:'Retrato grupal'},
-    {src:'img/formacion.jpg', cap:'Ensamble Cantaima 2025'},
-    {src:'img/foto4.jpg', cap:'Natagaima, Tolima'},
-    {src:'img/estudio.jpg', cap:'Estudio de grabación'},
-    {src:'img/IMG-20251120-WA0000.jpg', cap:'Concierto — Ensamble Cantaima'},
-    {src:'img/Cantaima_2025_-70.jpg', cap:'Sesión fotográfica 2025'},
-    {src:'img/foto6.JPG', cap:'Festival Turpial Cafetero 2025'},
+  const photos=[
+    {src:'img/DDP06546.jpg',cap:'Ensamble Cantaima'},
+    {src:'img/foto2.jpg',cap:'Retrato grupal'},
+    {src:'img/formacion.jpg',cap:'Ensamble Cantaima 2025'},
+    {src:'img/foto4.jpg',cap:'Natagaima, Tolima'},
+    {src:'img/estudio.jpg',cap:'Estudio de grabación'},
+    {src:'img/IMG-20251120-WA0000.jpg',cap:'Concierto — Ensamble Cantaima'},
+    {src:'img/Cantaima_2025_-70.jpg',cap:'Sesión fotográfica 2025'},
+    {src:'img/foto6.JPG',cap:'Festival Turpial Cafetero 2025'},
   ];
-  let currentPhoto = 0;
+  let currentPhoto=0;
   function openLightbox(i){
     currentPhoto=i;
     document.getElementById('lightbox-img').src=photos[i].src;
@@ -779,40 +798,6 @@
     });
   });
 </script>
-
-<!-- BOTÓN FLOTANTE WHATSAPP -->
-<a href="https://wa.me/573154529419?text=Hola%20Ensamble%20Cantaima%2C%20me%20interesa%20obtener%20m%C3%A1s%20informaci%C3%B3n" 
-   target="_blank" rel="noopener" id="wa-btn" aria-label="Contactar por WhatsApp">
-  <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-  </svg>
-</a>
-
-<style>
-#wa-btn {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 56px;
-  height: 56px;
-  background: #25D366;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
-  z-index: 9999;
-  transition: transform .2s, box-shadow .2s;
-}
-#wa-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 28px rgba(37,211,102,0.6);
-}
-#wa-btn svg {
-  width: 28px;
-  height: 28px;
-}
-</style>
 
 </body>
 </html>
