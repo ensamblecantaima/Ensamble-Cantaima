@@ -338,9 +338,9 @@
 				</div>
 				<div class="stats-block" style="margin-top:1.5rem">
 					<div class="stat-cell"><div class="stat-n">2013</div><div class="stat-l" id="s1">Fundación</div></div>
-					<div class="stat-cell"><div class="stat-n">8</div><div class="stat-l" id="s2">Músicos</div></div>
-					<div class="stat-cell"><div class="stat-n">4</div><div class="stat-l" id="s3">Países</div></div>
-					<div class="stat-cell"><div class="stat-n">+9</div><div class="stat-l" id="s4">Premios</div></div>
+					<div class="stat-cell"><div class="stat-n" data-target="8">0</div><div class="stat-l" id="s2">Músicos</div></div>
+					<div class="stat-cell"><div class="stat-n" data-target="4">0</div><div class="stat-l" id="s3">Países</div></div>
+					<div class="stat-cell"><div class="stat-n" data-target="9" data-prefix="+">0</div><div class="stat-l" id="s4">Premios</div></div>
 				</div>
 			</div>
 		</div>
@@ -493,6 +493,26 @@
 	<section id="discografia">
 		<div class="sec-label reveal" id="l-disc">Música</div>
 		<h2 class="sec-title reveal"><em>Discografía</em></h2>
+		<div class="singles-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-bottom:2.5rem">
+			<div class="single-card reveal">
+				<div class="single-video" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:#000;border:1px solid rgba(200,168,75,.2)">
+					<iframe src="https://www.youtube.com/embed/rySD0A6Dl0o?rel=0&modestbranding=1" allow="encrypted-media" allowfullscreen loading="lazy" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe>
+				</div>
+				<div style="padding:1rem 0">
+					<div class="single-yr" style="font-size:10px;letter-spacing:2px;color:var(--gold);margin-bottom:.3rem">2026 · SINGLE</div>
+					<div class="single-t" style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--wht)">San Juan y San Pedro</div>
+				</div>
+			</div>
+			<div class="single-card reveal d1">
+				<div class="single-video" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:#000;border:1px solid rgba(200,168,75,.2)">
+					<iframe src="https://www.youtube.com/embed/rcOcLq6p9nE?rel=0&modestbranding=1" allow="encrypted-media" allowfullscreen loading="lazy" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe>
+				</div>
+				<div style="padding:1rem 0">
+					<div class="single-yr" style="font-size:10px;letter-spacing:2px;color:var(--gold);margin-bottom:.3rem">2025 · SINGLE</div>
+					<div class="single-t" style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--wht)">Cantaima en Vivo</div>
+				</div>
+			</div>
+		</div>
 		<div class="album reveal scale-in">
 			<a href="https://youtube.com/playlist?list=PLNcB3_b5TfT9gvTsymBAx90Wz2VltJrbQ&si=GRNHpDHaFBJWS6vf" target="_blank" rel="noopener" style="display:block;cursor:pointer" title="Escuchar en YouTube">
 				<div class="album-art" style="padding:0;overflow:hidden;border:1px solid rgba(200,168,75,.2);transition:opacity .2s">
@@ -782,6 +802,37 @@
 				rootMargin: '0px 0px -40px 0px'
 			});
 			document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+		})();
+
+		/* ── ANIMATED COUNTERS ── */
+		(function(){
+			const counters = document.querySelectorAll('.stat-n[data-target]');
+			let animated = false;
+			const counterObserver = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if(entry.isIntersecting && !animated){
+						animated = true;
+						counters.forEach(counter => {
+							const target = parseInt(counter.dataset.target);
+							const prefix = counter.dataset.prefix || '';
+							const suffix = counter.dataset.suffix || '';
+							const duration = 2000;
+							const start = performance.now();
+							function update(now){
+								const elapsed = now - start;
+								const progress = Math.min(elapsed / duration, 1);
+								const eased = 1 - Math.pow(1 - progress, 3);
+								const current = Math.round(eased * target);
+								counter.textContent = prefix + current + suffix;
+								if(progress < 1) requestAnimationFrame(update);
+							}
+							requestAnimationFrame(update);
+						});
+						counterObserver.unobserve(entry.target);
+					}
+				});
+			}, { threshold: 0.5 });
+			if(counters.length) counterObserver.observe(counters[0].closest('.stats-block'));
 		})();
 
 		/* ── LANG ── */
