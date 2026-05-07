@@ -840,33 +840,7 @@
 		#wa-btn{position:fixed;bottom:2rem;right:2rem;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.4);z-index:9999;transition:transform .2s,box-shadow .2s}
 		#wa-btn:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,0.6)}
 		#wa-btn svg{width:28px;height:28px}
-		/* ── LIGHTBOX MODAL ── */
-		.lightbox-modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(8,8,7,0.95);backdrop-filter:blur(12px);z-index:10000;display:none;align-items:center;justify-content:center;opacity:0;transition:opacity .3s ease}
-		.lightbox-modal.open{display:flex;opacity:1}
-		.lightbox-content{position:relative;width:90%;max-width:1000px;height:85vh;display:flex;flex-direction:column;align-items:center;justify-content:center}
-		.lightbox-img-container{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;overflow:hidden}
-		.lightbox-img-container img{max-width:100%;max-height:100%;object-fit:contain;border-radius:4px;box-shadow:0 8px 40px rgba(200,168,75,.2)}
-		.lightbox-close{position:absolute;top:1.5rem;right:1.5rem;width:40px;height:40px;background:rgba(200,168,75,.15);border:none;color:var(--wht);font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all .2s;z-index:10001}
-		.lightbox-close:hover{background:rgba(200,168,75,.3);transform:scale(1.1)}
-		.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);width:50px;height:50px;background:rgba(200,168,75,.15);border:none;color:var(--gold);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:4px;transition:all .2s;z-index:10001}
-		.lightbox-nav:hover{background:rgba(200,168,75,.3);transform:translateY(-50%) scale(1.1)}
-		.lightbox-prev{left:1.5rem}
-		.lightbox-next{right:1.5rem}
-		.lightbox-counter{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);background:rgba(200,168,75,.15);color:var(--gold);padding:8px 16px;border-radius:4px;font-size:12px;letter-spacing:2px;font-weight:400;z-index:10001}
 	</style>
-
-	<!-- LIGHTBOX MODAL -->
-	<div id="lightboxModal" class="lightbox-modal">
-		<div class="lightbox-content">
-			<button class="lightbox-close" onclick="closeLightbox()">×</button>
-			<button class="lightbox-nav lightbox-prev" onclick="prevLightboxImage()">❮</button>
-			<div class="lightbox-img-container">
-				<img id="lightboxImage" src="" alt="Foto ampliada"/>
-			</div>
-			<button class="lightbox-nav lightbox-next" onclick="nextLightboxImage()">❯</button>
-			<div class="lightbox-counter"><span id="lightboxCounter">1 / 10</span></div>
-		</div>
-	</div>
 
 	<script>
 		/* ── SCROLL REVEAL con IntersectionObserver ── */
@@ -889,31 +863,35 @@
 		(function(){
 			const counters = document.querySelectorAll('.stat-n[data-target]');
 			let animated = false;
-			const counterObserver = new IntersectionObserver((entries) => {
-				entries.forEach(entry => {
-					if(entry.isIntersecting && !animated){
-						animated = true;
-						counters.forEach(counter => {
-							const target = parseInt(counter.dataset.target);
-							const prefix = counter.dataset.prefix || '';
-							const suffix = counter.dataset.suffix || '';
-							const duration = 2000;
-							const start = performance.now();
-							function update(now){
-								const elapsed = now - start;
-								const progress = Math.min(elapsed / duration, 1);
-								const eased = 1 - Math.pow(1 - progress, 3);
-								const current = Math.round(eased * target);
-								counter.textContent = prefix + current + suffix;
-								if(progress < 1) requestAnimationFrame(update);
-							}
-							requestAnimationFrame(update);
-						});
-						counterObserver.unobserve(entry.target);
+			function runCounters(){
+				if(animated) return;
+				animated = true;
+				counters.forEach(counter => {
+					const target = parseInt(counter.dataset.target);
+					const prefix = counter.dataset.prefix || '';
+					const suffix = counter.dataset.suffix || '';
+					const duration = 2000;
+					const start = performance.now();
+					function update(now){
+						const elapsed = now - start;
+						const progress = Math.min(elapsed / duration, 1);
+						const eased = 1 - Math.pow(1 - progress, 3);
+						const current = Math.round(eased * target);
+						counter.textContent = prefix + current + suffix;
+						if(progress < 1) requestAnimationFrame(update);
 					}
+					requestAnimationFrame(update);
 				});
-			}, { threshold: 0.5 });
-			if(counters.length) counterObserver.observe(counters[0].closest('.stats-block'));
+			}
+			const statsBlock = counters.length ? counters[0].closest('.stats-block') : null;
+			if(statsBlock){
+				const observer = new IntersectionObserver((entries) => {
+					entries.forEach(entry => {
+						if(entry.isIntersecting){ runCounters(); observer.unobserve(entry.target); }
+					});
+				}, { threshold: 0.3, rootMargin: '0px 0px 0px 0px' });
+				observer.observe(statsBlock);
+			}
 		})();
 
 		/* ── LANG ── */
@@ -1018,73 +996,6 @@
 				const target=document.querySelector(a.getAttribute('href'));
 				if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth'});}
 			});
-		});
-
-		/* ── LIGHTBOX GALLERY ── */
-		const lightboxImages = [
-			'Integrantes/image00008.jpg',
-			'Integrantes/image00001.jpg',
-			'Integrantes/image00006.jpg',
-			'Integrantes/image00007.jpg',
-			'Integrantes/image00011.jpg',
-			'Integrantes/image00013.jpg',
-			'Integrantes/image00017.jpg',
-			'Integrantes/image00018.jpg',
-			'Integrantes/image00022.jpg',
-			'Integrantes/image00015.jpg'
-		];
-		let currentImageIndex = 0;
-
-		document.querySelectorAll('.members-grid .member-card').forEach((card, index) => {
-			card.addEventListener('click', () => {
-				currentImageIndex = index;
-				openLightbox();
-			});
-		});
-
-		function openLightbox() {
-			const modal = document.getElementById('lightboxModal');
-			const img = document.getElementById('lightboxImage');
-			img.src = lightboxImages[currentImageIndex];
-			updateCounter();
-			modal.classList.add('open');
-			document.body.style.overflow = 'hidden';
-		}
-
-		function closeLightbox() {
-			const modal = document.getElementById('lightboxModal');
-			modal.classList.remove('open');
-			document.body.style.overflow = '';
-		}
-
-		function nextLightboxImage() {
-			currentImageIndex = (currentImageIndex + 1) % lightboxImages.length;
-			const img = document.getElementById('lightboxImage');
-			img.src = lightboxImages[currentImageIndex];
-			updateCounter();
-		}
-
-		function prevLightboxImage() {
-			currentImageIndex = (currentImageIndex - 1 + lightboxImages.length) % lightboxImages.length;
-			const img = document.getElementById('lightboxImage');
-			img.src = lightboxImages[currentImageIndex];
-			updateCounter();
-		}
-
-		function updateCounter() {
-			document.getElementById('lightboxCounter').textContent = `${currentImageIndex + 1} / ${lightboxImages.length}`;
-		}
-
-		// Cerrar con tecla ESC
-		document.addEventListener('keydown', (e) => {
-			if(e.key === 'Escape') closeLightbox();
-			if(e.key === 'ArrowRight') nextLightboxImage();
-			if(e.key === 'ArrowLeft') prevLightboxImage();
-		});
-
-		// Cerrar al hacer clic fuera de la imagen
-		document.getElementById('lightboxModal').addEventListener('click', (e) => {
-			if(e.target === document.getElementById('lightboxModal')) closeLightbox();
 		});
 	</script>
 </body>
