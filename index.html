@@ -240,6 +240,8 @@
 		.gallery-item:hover img{transform:scale(1.08);filter:grayscale(0%) brightness(1)}
 		.gallery-item.wide{grid-column:span 2}
 		.gallery-item.tall{grid-row:span 2}
+		.gallery-controls{display:flex;justify-content:center;margin-top:1.5rem}
+		.gallery-controls a{padding:0.95rem 1.7rem;min-width:160px;text-align:center}
 		/* LIGHTBOX */
 		#lightbox{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.94);align-items:center;justify-content:center;cursor:zoom-out}
 		#lightbox.open{display:flex}
@@ -666,7 +668,7 @@
 				<img src="img/galeria/gallery-10.jpg" alt="Ensamble Cantaima en tarima foto 10" loading="lazy" decoding="async"/>
 			</div>
 		</div>
-		<div class="gallery-controls reveal">
+		<div class="gallery-controls">
 			<a class="btn-cta btn-secondary" href="#galeria-completa">Ver más</a>
 		</div>
 	</section>
