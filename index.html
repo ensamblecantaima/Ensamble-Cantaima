@@ -142,6 +142,12 @@
 		.vids-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:2.5rem}
 		.vid-wrap{position:relative;background:#000}
 		.vid-wrap iframe{width:100%;aspect-ratio:16/9;display:block;border:none}
+		/* Ajustes específicos para el iframe de 'Espectáculo' */
+		.vid-wrap#autoplay-vid{max-width:1000px;margin-top:-40px}
+		@media (max-width:768px){
+			.vid-wrap#autoplay-vid{margin-top:0;max-width:100%}
+			.vid-wrap#autoplay-vid iframe{max-height:none}
+		}
 		.vid-info{padding:.9rem 1rem;background:rgba(255,255,255,.03)}
 		.vid-t{font-size:13px;color:var(--wht);font-weight:300}
 		.vid-tag{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-top:3px}
@@ -391,8 +397,8 @@
 	<hr class="hr"/>
 	<div id="espectaculo" class="panel">
 			<div class="gallery-grid" style="grid-auto-rows:auto;">
-			<div class="vid-wrap reveal" style="max-width:1200px;width:100%;margin:0 auto;" id="autoplay-vid">
-				<iframe id="espectaculo-iframe" data-src="https://www.youtube.com/embed/rcOcLq6p9nE?rel=0&modestbranding=1&playsinline=1" src="https://www.youtube.com/embed/rcOcLq6p9nE?rel=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen loading="lazy" title="Ensamble Cantaima - Espectáculo" style="width:100%;aspect-ratio:16/9;display:block;border:none;max-height:720px"></iframe>
+			<div class="vid-wrap reveal" style="max-width:1000px;width:100%;" id="autoplay-vid">
+				<iframe id="espectaculo-iframe" data-src="https://www.youtube.com/embed/rcOcLq6p9nE?rel=0&modestbranding=1&playsinline=1" src="https://www.youtube.com/embed/rcOcLq6p9nE?rel=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media" allowfullscreen loading="lazy" title="Ensamble Cantaima - Espectáculo" style="width:100%;aspect-ratio:16/9;display:block;border:none;max-height:640px"></iframe>
 			</div>
 			<script>
 			// Autoplay the YouTube iframe when the video container is at least 50% visible
