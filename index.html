@@ -391,9 +391,31 @@
 	<hr class="hr"/>
 	<div id="espectaculo" class="panel">
 		<div class="gallery-grid">
-			<div class="vid-wrap reveal" style="max-width:900px;margin:0 auto;">
-				<iframe src="https://www.youtube.com/embed/w58LufATf0w?rel=0&modestbranding=1" allow="encrypted-media" allowfullscreen loading="lazy" title="Ensamble Cantaima - Presentación en vivo"></iframe>
+			<div class="vid-wrap reveal" style="max-width:900px;margin:0 auto;" id="autoplay-vid">
+				<iframe id="espectaculo-iframe" data-src="https://www.youtube.com/embed/rcOcLq6p9nE?rel=0&modestbranding=1&playsinline=1" src="https://www.youtube.com/embed/rcOcLq6p9nE?rel=0&modestbranding=1&playsinline=1" allow="encrypted-media" allowfullscreen loading="lazy" title="Ensamble Cantaima - Espectáculo"></iframe>
 			</div>
+			<script>
+			// Autoplay the YouTube iframe when the video container is at least 50% visible
+			document.addEventListener('DOMContentLoaded', function(){
+				const container = document.getElementById('autoplay-vid');
+				const iframe = document.getElementById('espectaculo-iframe');
+				if(!container || !iframe) return;
+				const base = iframe.dataset.src;
+				const opts = { root: null, rootMargin: '0px', threshold: 0.5 };
+				const io = new IntersectionObserver((entries)=>{
+					entries.forEach(e=>{
+						if(e.isIntersecting){
+							// Add autoplay and mute so browsers allow autoplay
+							if(!iframe.src.includes('autoplay=1')) iframe.src = base + '&autoplay=1&mute=1';
+						} else {
+							// Remove autoplay to stop playback when out of view
+							if(iframe.src.includes('autoplay=1')) iframe.src = base;
+						}
+					});
+				}, opts);
+				io.observe(container);
+			});
+			</script>
 		</div>
 				<div class="cta-btns">
                                     <a class="btn-cta" href="https://wa.me/573154529419?text=Hola%20Ensamble%20Cantaima%2C%20deseo%20solicitar%20una%20presentaci%C3%B3n." target="_blank" rel="noopener" id="cta-show-btn">Solicitar presentación</a>
