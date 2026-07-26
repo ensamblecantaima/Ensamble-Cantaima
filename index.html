@@ -232,10 +232,10 @@
 		.member-card:hover{border-color:var(--gold);box-shadow:0 6px 24px rgba(200,168,75,.15)}
 		.member-card:hover img{filter:grayscale(0%) brightness(1);transform:scale(1.03)}
 		/* ── GALLERY ── */
-		.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:3.5rem}
-		.gallery-item{position:relative;overflow:hidden;aspect-ratio:1;cursor:pointer;background:#111}
+		.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));grid-auto-rows:minmax(160px,160px);gap:0;margin-top:3.5rem}
+		.gallery-item{position:relative;overflow:hidden;aspect-ratio:1;cursor:pointer;background:transparent}
 		.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease, filter .4s ease;filter:grayscale(20%) brightness(.85)}
-		.gallery-item:hover img{transform:scale(1.06);filter:grayscale(0%) brightness(1)}
+		.gallery-item:hover img{transform:scale(1.08);filter:grayscale(0%) brightness(1)}
 		.gallery-item.wide{grid-column:span 2}
 		.gallery-item.tall{grid-row:span 2}
 		/* LIGHTBOX */
@@ -636,34 +636,34 @@
 		<h2 class="sec-title reveal"><em>Galería</em></h2>
 		<div class="gallery-grid">
 			<div class="gallery-item wide reveal d1" onclick="openLightbox(0)">
-				<img src="img/Contenido%20Pagina%20web/1.1.jpeg" alt="Ensamble Cantaima foto 1" loading="lazy"/>
+				<img src="img/Contenido%20Pagina%20web/1.1.jpeg" alt="Ensamble Cantaima foto 1" loading="lazy" decoding="async"/>
 			</div>
 			<div class="gallery-item reveal d2" onclick="openLightbox(1)">
-				<img src="img/Contenido%20Pagina%20web/2.jpeg" alt="Ensamble Cantaima foto 2" loading="lazy"/>
+				<img src="img/Contenido%20Pagina%20web/2.jpeg" alt="Ensamble Cantaima foto 2" loading="lazy" decoding="async"/>
 			</div>
 			<div class="gallery-item reveal d3" onclick="openLightbox(2)">
-				<img src="img/Contenido%20Pagina%20web/3.jpeg" alt="Ensamble Cantaima foto 3" loading="lazy"/>
+				<img src="img/Contenido%20Pagina%20web/3.jpeg" alt="Ensamble Cantaima foto 3" loading="lazy" decoding="async"/>
 			</div>
 			<div class="gallery-item wide reveal d2" onclick="openLightbox(3)">
-				<img src="img/Contenido%20Pagina%20web/DSC06475%20(1).JPG" alt="Ensamble Cantaima foto 4" loading="lazy"/>
+				<img src="img/Contenido%20Pagina%20web/DSC06475%20(1).JPG" alt="Ensamble Cantaima foto 4" loading="lazy" decoding="async"/>
 			</div>
 			<div class="gallery-item reveal d3" onclick="openLightbox(4)">
-				<img src="img/Contenido%20Pagina%20web/DSC06484%20(1).JPG" alt="Ensamble Cantaima foto 5" loading="lazy"/>
+				<img src="img/Contenido%20Pagina%20web/DSC06484%20(1).JPG" alt="Ensamble Cantaima foto 5" loading="lazy" decoding="async"/>
 			</div>
 			<div class="gallery-item reveal d4" onclick="openLightbox(5)">
-				<img src="img/Contenido%20Pagina%20web/DSC06487.JPG" alt="Ensamble Cantaima foto 6" loading="lazy"/>
+				<img src="img/Contenido%20Pagina%20web/DSC06487.JPG" alt="Ensamble Cantaima foto 6" loading="lazy" decoding="async"/>
 			</div>
 			<div class="gallery-item wide reveal d3" onclick="openLightbox(6)">
-				<img src="img/Contenido%20Pagina%20web/DSC06489.JPG" alt="Ensamble Cantaima foto 7" loading="lazy"/>
+				<img src="img/Contenido%20Pagina%20web/DSC06489.JPG" alt="Ensamble Cantaima foto 7" loading="lazy" decoding="async"/>
 			</div>
 			<div class="gallery-item wide reveal d4" onclick="openLightbox(7)">
-				<img src="img/Contenido%20Pagina%20web/DSC06492.JPG" alt="Ensamble Cantaima foto 8" loading="lazy"/>
+				<img src="img/Contenido%20Pagina%20web/DSC06492.JPG" alt="Ensamble Cantaima foto 8" loading="lazy" decoding="async"/>
 			</div>
 			<div class="gallery-item reveal d5" onclick="openLightbox(8)">
-				<img src="img/Contenido%20Pagina%20web/DSC06652.JPG" alt="Ensamble Cantaima foto 9" loading="lazy"/>
+				<img src="img/Contenido%20Pagina%20web/DSC06652.JPG" alt="Ensamble Cantaima foto 9" loading="lazy" decoding="async"/>
 			</div>
 			<div class="gallery-item reveal d6" onclick="openLightbox(9)">
-				<img src="img/Contenido%20Pagina%20web/DSC06665.JPG" alt="Ensamble Cantaima foto 10" loading="lazy"/>
+				<img src="img/Contenido%20Pagina%20web/DSC06665.JPG" alt="Ensamble Cantaima foto 10" loading="lazy" decoding="async"/>
 			</div>
 		</div>
 	</section>
