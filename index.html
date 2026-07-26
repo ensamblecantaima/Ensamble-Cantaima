@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+?<!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8"/>
@@ -233,6 +233,8 @@
 		.member-card:hover img{filter:grayscale(0%) brightness(1);transform:scale(1.03)}
 		/* ── GALLERY ── */
 		.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));grid-auto-rows:220px;gap:0;margin-top:3.5rem}
+           .gallery-grid.preview{grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:220px}
+           .gallery-grid.full-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));grid-auto-rows:220px}
 		.gallery-item{position:relative;overflow:hidden;cursor:pointer;background:transparent}
 		.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease, filter .4s ease;filter:grayscale(20%) brightness(.85)}
 		.gallery-item:hover img{transform:scale(1.08);filter:grayscale(0%) brightness(1)}
@@ -635,7 +637,43 @@
 	<section id="galeria">
 		<div class="sec-label reveal" id="l-gal">Registro visual</div>
 		<h2 class="sec-title reveal"><em>Galería</em></h2>
-		<div class="gallery-grid">
+		<div class="gallery-grid preview">
+			<div class="gallery-item reveal d2" onclick="openLightbox(1)">
+				<img src="img/galeria/gallery-2.jpg" alt="Ensamble Cantaima en tarima foto 2" loading="lazy" decoding="async"/>
+			</div>
+			<div class="gallery-item reveal d3" onclick="openLightbox(2)">
+				<img src="img/galeria/gallery-3.jpg" alt="Ensamble Cantaima en tarima foto 3" loading="lazy" decoding="async"/>
+			</div>
+			<div class="gallery-item reveal d4" onclick="openLightbox(3)">
+				<img src="img/galeria/gallery-4.jpg" alt="Ensamble Cantaima foto 4" loading="lazy" decoding="async"/>
+			</div>
+			<div class="gallery-item reveal d5" onclick="openLightbox(4)">
+				<img src="img/galeria/gallery-5.jpg" alt="Ensamble Cantaima foto 5" loading="lazy" decoding="async"/>
+			</div>
+			<div class="gallery-item reveal d6" onclick="openLightbox(5)">
+				<img src="img/galeria/gallery-6.jpg" alt="Ensamble Cantaima foto 6" loading="lazy" decoding="async"/>
+			</div>
+			<div class="gallery-item reveal d7" onclick="openLightbox(6)">
+				<img src="img/galeria/gallery-7.jpg" alt="Ensamble Cantaima foto 7" loading="lazy" decoding="async"/>
+			</div>
+			<div class="gallery-item reveal d8" onclick="openLightbox(7)">
+				<img src="img/galeria/gallery-8.jpg" alt="Ensamble Cantaima en tarima foto 8" loading="lazy" decoding="async"/>
+			</div>
+			<div class="gallery-item reveal d9" onclick="openLightbox(8)">
+				<img src="img/galeria/gallery-9.jpg" alt="Ensamble Cantaima en tarima foto 9" loading="lazy" decoding="async"/>
+			</div>
+			<div class="gallery-item reveal d10" onclick="openLightbox(9)">
+				<img src="img/galeria/gallery-10.jpg" alt="Ensamble Cantaima en tarima foto 10" loading="lazy" decoding="async"/>
+			</div>
+		</div>
+		<div class="gallery-controls reveal">
+			<a class="btn-cta btn-secondary" href="#galeria-completa">Ver más</a>
+		</div>
+	</section>
+	<section id="galeria-completa">
+		<div class="sec-label reveal">Galería completa</div>
+		<h2 class="sec-title reveal"><em>Todas las fotos</em></h2>
+		<div class="gallery-grid full-grid">
 			<div class="gallery-item reveal d1" onclick="openLightbox(0)">
 				<img src="img/galeria/gallery-1.jpg" alt="Ensamble Cantaima foto 1" loading="lazy" decoding="async"/>
 			</div>
@@ -912,4 +950,9 @@
 	</script>
 </body>
 </html>
+
+
+
+
+
 
