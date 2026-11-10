@@ -246,6 +246,8 @@
 		.member-card{position:relative;overflow:hidden;aspect-ratio:3/4;cursor:pointer;background:#111;border:1px solid rgba(200,168,75,.1);border-radius:4px;transition:all .3s ease}
 		.member-card.featured{grid-column:1/-1;aspect-ratio:16/6}
 		.member-card img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(15%) brightness(.9);transition:filter .4s ease, transform .4s ease}
+		.member-card .member-name{position:absolute;left:0;right:0;bottom:0;padding:0.9rem 0.75rem 0.75rem;color:#fff;text-align:center;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;background:linear-gradient(to top, rgba(0,0,0,.8), rgba(0,0,0,0));z-index:1;line-height:1.2}
+		.member-card.featured .member-name{font-size:0.8rem;letter-spacing:0.22em;padding-bottom:1rem}
 		.member-card:hover{border-color:var(--gold);box-shadow:0 6px 24px rgba(200,168,75,.15)}
 		.member-card:hover img{filter:grayscale(0%) brightness(1);transform:scale(1.03)}
 		/* ── GALLERY ── */
@@ -393,16 +395,46 @@
 		<h2 class="sec-title reveal">Conoce a nuestros <em>integrantes</em></h2>
 		<p class="body-txt reveal" id="p-integrantes" style="max-width:700px;margin-bottom:1rem">Cada uno de nuestros músicos aporta su talento, pasión y años de dedicación a la música andina colombiana. Juntos formamos la voz del territorio pijao.</p>
 		<div class="members-grid">
-			<div class="member-card featured reveal d1"><img src="Integrantes/image00008.jpg" alt="Ensamble Cantaima - Foto grupal" loading="lazy"/></div>
-			<div class="member-card reveal d2"><img src="Integrantes/image00001.jpg" alt="Integrante del Ensamble Cantaima" loading="lazy"/></div>
-			<div class="member-card reveal d3"><img src="Integrantes/image00006.jpg" alt="Integrante del Ensamble Cantaima" loading="lazy"/></div>
-			<div class="member-card reveal d4"><img src="Integrantes/image00007.jpg" alt="Integrante del Ensamble Cantaima" loading="lazy"/></div>
-			<div class="member-card reveal d5"><img src="Integrantes/image00011.jpg" alt="Integrante del Ensamble Cantaima" loading="lazy"/></div>
-			<div class="member-card reveal d1"><img src="Integrantes/image00013.jpg" alt="Integrante del Ensamble Cantaima" loading="lazy"/></div>
-			<div class="member-card reveal d2"><img src="Integrantes/image00017.jpg" alt="Integrante del Ensamble Cantaima" loading="lazy"/></div>
-			<div class="member-card reveal d3"><img src="Integrantes/image00018.jpg" alt="Integrante del Ensamble Cantaima" loading="lazy"/></div>
-			<div class="member-card reveal d4"><img src="Integrantes/image00022.jpg" alt="Integrante del Ensamble Cantaima" loading="lazy"/></div>
-			<div class="member-card reveal d5"><img src="Integrantes/image00015.jpg" alt="Integrante del Ensamble Cantaima" loading="lazy"/></div>
+			<div class="member-card featured reveal d1">
+				<img src="Integrantes/image00008.jpg" alt="Ensamble Cantaima - Foto grupal" loading="lazy"/>
+				<span class="member-name">Ensamble Cantaima</span>
+			</div>
+			<div class="member-card reveal d2">
+				<img src="Integrantes/image00001.jpg" alt="Izel - Vocalista" loading="lazy"/>
+				<span class="member-name">Izel - Vocalista</span>
+			</div>
+			<div class="member-card reveal d3">
+				<img src="Integrantes/image00006.jpg" alt="Santiago Gonzalez - Tiplista - arreglista" loading="lazy"/>
+				<span class="member-name">Santiago Gonzalez - Tiplista - arreglista</span>
+			</div>
+			<div class="member-card reveal d4">
+				<img src="Integrantes/image00007.jpg" alt="Isabella - Vocalista" loading="lazy"/>
+				<span class="member-name">Isabella - Vocalista</span>
+			</div>
+			<div class="member-card reveal d5">
+				<img src="Integrantes/image00011.jpg" alt="Karol - Bandolista" loading="lazy"/>
+				<span class="member-name">Karol - Bandolista</span>
+			</div>
+			<div class="member-card reveal d1">
+				<img src="Integrantes/image00013.jpg" alt="María - Flautista" loading="lazy"/>
+				<span class="member-name">María - Flautista</span>
+			</div>
+			<div class="member-card reveal d2">
+				<img src="Integrantes/image00017.jpg" alt="Valentina - Vocalista" loading="lazy"/>
+				<span class="member-name">Valentina - Vocalista</span>
+			</div>
+			<div class="member-card reveal d3">
+				<img src="Integrantes/image00018.jpg" alt="Santiago Poveda - Percusionista - Director musical" loading="lazy"/>
+				<span class="member-name">Santiago Poveda - Percusionista - Director musical</span>
+			</div>
+			<div class="member-card reveal d4">
+				<img src="Integrantes/image00022.jpg" alt="Santiago Marmolejo - Bajista" loading="lazy"/>
+				<span class="member-name">Santiago Marmolejo - Bajista</span>
+			</div>
+			<div class="member-card reveal d5">
+				<img src="Integrantes/image00015.jpg" alt="Ensamble Cantaima - Grupo" loading="lazy"/>
+				<span class="member-name">Ensamble Cantaima</span>
+			</div>
 		</div>
 	</section>
 	<hr class="hr"/>
