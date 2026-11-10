@@ -1009,11 +1009,31 @@
 			{src:'img/galeria/gallery-9.jpg',cap:'Ensamble Cantaima foto 9'},
 			{src:'img/galeria/gallery-10.jpg',cap:'Ensamble Cantaima foto 10'},
 		];
+		const memberPhotos = Array.from(document.querySelectorAll('.member-card')).map((card, index) => {
+			const img = card.querySelector('img');
+			const name = card.querySelector('.member-name')?.textContent?.trim() || `Integrante ${index + 1}`;
+			return { src: img ? img.src : '', cap: name };
+		});
 		let currentPhoto=0;
+		let activeLightboxSet='gallery';
+		function renderLightboxPhoto(){
+			const activePhotos = activeLightboxSet === 'member' ? memberPhotos : photos;
+			if(!activePhotos.length) return;
+			const photo = activePhotos[currentPhoto] || activePhotos[0];
+			document.getElementById('lightbox-img').src = photo.src;
+			document.getElementById('lightbox-caption').textContent = photo.cap;
+		}
 		function openLightbox(i){
+			activeLightboxSet='gallery';
 			currentPhoto=i;
-			document.getElementById('lightbox-img').src=photos[i].src;
-			document.getElementById('lightbox-caption').textContent=photos[i].cap;
+			renderLightboxPhoto();
+			document.getElementById('lightbox').classList.add('open');
+			document.body.style.overflow='hidden';
+		}
+		function openMemberLightbox(i){
+			activeLightboxSet='member';
+			currentPhoto=i;
+			renderLightboxPhoto();
 			document.getElementById('lightbox').classList.add('open');
 			document.body.style.overflow='hidden';
 		}
@@ -1023,14 +1043,28 @@
 				document.body.style.overflow='';
 			}
 		}
-		function prevPhoto(e){e.stopPropagation();currentPhoto=(currentPhoto-1+photos.length)%photos.length;document.getElementById('lightbox-img').src=photos[currentPhoto].src;document.getElementById('lightbox-caption').textContent=photos[currentPhoto].cap;}
-		function nextPhoto(e){e.stopPropagation();currentPhoto=(currentPhoto+1)%photos.length;document.getElementById('lightbox-img').src=photos[currentPhoto].src;document.getElementById('lightbox-caption').textContent=photos[currentPhoto].cap;}
+		function prevPhoto(e){
+			e.stopPropagation();
+			const activePhotos = activeLightboxSet === 'member' ? memberPhotos : photos;
+			currentPhoto = (currentPhoto - 1 + activePhotos.length) % activePhotos.length;
+			renderLightboxPhoto();
+		}
+		function nextPhoto(e){
+			e.stopPropagation();
+			const activePhotos = activeLightboxSet === 'member' ? memberPhotos : photos;
+			currentPhoto = (currentPhoto + 1) % activePhotos.length;
+			renderLightboxPhoto();
+		}
 		document.addEventListener('keydown',e=>{
 			if(document.getElementById('lightbox').classList.contains('open')){
 				if(e.key==='ArrowLeft')prevPhoto(e);
 				if(e.key==='ArrowRight')nextPhoto(e);
 				if(e.key==='Escape')closeLightbox();
 			}
+		});
+		document.querySelectorAll('.member-card').forEach((card, index) => {
+			card.style.cursor = 'pointer';
+			card.addEventListener('click', () => openMemberLightbox(index));
 		});
 
 		/* ── SMOOTH SCROLL ── */
