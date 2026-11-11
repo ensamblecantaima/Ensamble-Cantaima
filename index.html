@@ -86,6 +86,12 @@
 		.reveal.visible{opacity:1;transform:none;}
 		.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}.reveal.d5{transition-delay:.40s}.reveal.d6{transition-delay:.48s}.reveal.d7{transition-delay:.56s}.reveal.d8{transition-delay:.64s}
 		/* ── NAV ── */
+		.corner-frame{position:fixed;inset:18px;pointer-events:none;z-index:998;opacity:.72}
+		.corner-frame span{position:absolute;width:90px;height:90px;border-color:rgba(212,176,107,.22);border-style:solid;border-width:0}
+		.corner-frame .c1{top:0;left:0;border-top-width:1px;border-left-width:1px}
+		.corner-frame .c2{top:0;right:0;border-top-width:1px;border-right-width:1px}
+		.corner-frame .c3{bottom:0;left:0;border-bottom-width:1px;border-left-width:1px}
+		.corner-frame .c4{bottom:0;right:0;border-bottom-width:1px;border-right-width:1px}
 		nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:72px;background:rgba(15,13,10,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 		.nav-brand{display:flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none}
 		.nav-brand img{height:42px;width:auto;display:block;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.25))}
@@ -328,6 +334,12 @@
 	</style>
 </head>
 <body>
+	<div class="corner-frame" aria-hidden="true">
+		<span class="c1"></span>
+		<span class="c2"></span>
+		<span class="c3"></span>
+		<span class="c4"></span>
+	</div>
 	<!-- NAV -->
 	<nav id="navbar">
 		<a class="nav-brand" href="#hero"><img src="logo.png" alt="Ensamble Cantaima" style="height:38px;width:auto;display:block;"></a>
